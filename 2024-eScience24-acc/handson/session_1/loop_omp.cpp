@@ -2,6 +2,8 @@
  *
  *  Compile with
  *  nvc++ -mp -o loop_omp loop_omp.cpp
+ *  or
+ *  nvc++ -Mvect -mp -o loop_omp loop_omp.cpp
  */
 
 #include <omp.h>

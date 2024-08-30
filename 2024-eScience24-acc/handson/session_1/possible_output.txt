@@ -7,6 +7,15 @@
 [10000000] C0 = 91.898972 (took 2.839 s)
 [100000000] C0 = 97.871086 (took 28.801 s)
 #
+# nvc++ -Mvect -o loop_serial loop_serial.cpp 
+# ./loop_serial 
+[1000] C0 = 103.786217 (took 0.000 s)
+[10000] C0 = 100.480774 (took 0.000 s)
+[100000] C0 = 102.929886 (took 0.004 s)
+[1000000] C0 = 103.274300 (took 0.038 s)
+[10000000] C0 = 91.898972 (took 0.448 s)
+[100000000] C0 = 97.871086 (took 5.065 s)
+#
 # nvc++ -mp -o loop_omp loop_omp.cpp
 # ./loop_omp
 [1000] C0 = 103.786217 (took 0.003 s)
@@ -15,6 +24,15 @@
 [1000000] C0 = 103.274300 (took 0.063 s)
 [10000000] C0 = 91.898972 (took 0.502 s)
 [100000000] C0 = 97.871086 (took 5.179 s)
+#
+# nvc++ -Mvect -mp -o loop_omp loop_omp.cpp
+# ./loop_omp 
+[1000] C0 = 103.786217 (took 0.003 s)
+[10000] C0 = 100.480774 (took 0.002 s)
+[100000] C0 = 102.929886 (took 0.003 s)
+[1000000] C0 = 103.274300 (took 0.015 s)
+[10000000] C0 = 91.898972 (took 0.117 s)
+[100000000] C0 = 97.871086 (took 1.445 s)
 #
 # nvc++ -mp=gpu -gpu=managed -o loop_gpu_managed loop_gpu_managed.cpp
 # ./loop_gpu_managed

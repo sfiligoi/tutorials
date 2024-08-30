@@ -2,6 +2,8 @@
  *
  *  Compile with
  *  nvc++ -o loop_serial loop_serial.cpp
+ *  or
+ *  nvc++ -Mvect -o loop_serial loop_serial.cpp
  */
 
 #include <stdio.h>

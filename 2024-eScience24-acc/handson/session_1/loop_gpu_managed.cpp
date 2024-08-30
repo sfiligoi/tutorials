@@ -44,9 +44,6 @@ void compute(const int N) {
 }
 
 int main(int argc, char* argv[]) {
-	// artificially limit, to be nice to other tutorial users
-	omp_set_num_threads(10);
-
 	compute(1000);
 	compute(10000);
 	compute(100000);
