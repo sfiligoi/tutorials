@@ -6,7 +6,7 @@
 - Multi-threaded version [loop_omp.cpp](./loop_omp.cpp)
 - Basic GPU version [loop_gpu_managed.cpp](./loop_gpu_managed.cpp)
 - Improved GPU version [loop_gpu_full.cpp](./loop_gpu_full.cpp)
-- Naive GPU version [loop_gpu_slow.cpp](./loop_gpu_slowl.cpp)
+- Naive GPU version [loop_gpu_slow.cpp](./loop_gpu_slow.cpp)
 
 ## Interplay of parallel and serial code
 
