@@ -52,6 +52,16 @@
 [10000000] C0 = 91.898972 (took 0.049 s)
 [100000000] C0 = 97.871086 (took 0.579 s)
 #
+# nvc++ -mp=gpu -o loop_gpu_slow loop_gpu_slow.cpp
+# ./loop_gpu_slow
+[1000] C0 = 103.786224 (took 0.108 s)
+[10000] C0 = 100.480774 (took 0.007 s)
+[100000] C0 = 102.929886 (took 0.036 s)
+[1000000] C0 = 103.274300 (took 0.259 s)
+[10000000] C0 = 91.898972 (took 2.456 s)
+[100000000] C0 = 97.871086 (took 24.347 s)
+#
+#
 # nvc++ -mp -o mix_omp mix_omp.cpp
 # ./mix_omp 
 [1000] C0 = 103.786217 (took 0.017 s)
@@ -70,3 +80,41 @@
 [10000000] C0 = 98.030289 (took 3.662 s)
 [100000000] C0 = 98.467987 (took 9.150 s)
 #
+#
+# # On Grace Hopper
+# nvc++ -mp=gpu -gpu=managed -o loop_gpu_managed loop_gpu_managed.cpp
+# ./loop_gpu_managed
+[1000] C0 = 103.786224 (took 0.002 s)
+[10000] C0 = 100.480774 (took 0.001 s)
+[100000] C0 = 102.929886 (took 0.001 s)
+[1000000] C0 = 103.274300 (took 0.003 s)
+[10000000] C0 = 91.898972 (took 0.021 s)
+[100000000] C0 = 97.871086 (took 0.207 s)
+#
+# nvc++ -mp=gpu -o loop_gpu_full loop_gpu_full.cpp
+# ./loop_gpu_full
+[1000] C0 = 103.786224 (took 0.322 s)
+[10000] C0 = 100.480774 (took 0.001 s)
+[100000] C0 = 102.929886 (took 0.002 s)
+[1000000] C0 = 103.274300 (took 0.006 s)
+[10000000] C0 = 91.898972 (took 0.016 s)
+[100000000] C0 = 97.871086 (took 0.091 s)
+#
+# nvc++ -mp=gpu -o loop_gpu_slow loop_gpu_slow.cpp
+# ./loop_gpu_slow
+[1000] C0 = 103.786224 (took 0.324 s)
+[10000] C0 = 100.480774 (took 0.004 s)
+[100000] C0 = 102.929886 (took 0.008 s)
+[1000000] C0 = 103.274300 (took 0.017 s)
+[10000000] C0 = 91.898972 (took 0.090 s)
+[100000000] C0 = 97.871086 (took 0.816 s)
+#
+# nvc++ -mp=gpu -gpu=managed -o mix_gpu_managed mix_gpu_managed.cpp
+# ./mix_gpu_managed
+[1000] C0 = 103.786224 (took 0.004 s)
+[10000] C0 = 93.290894 (took 0.006 s)
+[100000] C0 = 101.563950 (took 0.039 s)
+[1000000] C0 = 101.805603 (took 0.081 s)
+[10000000] C0 = 98.030289 (took 0.816 s)
+[100000000] C0 = 98.467987 (took 2.758 s)
+
