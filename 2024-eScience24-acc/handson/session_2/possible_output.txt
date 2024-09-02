@@ -1,0 +1,195 @@
+# nvc++ -mp -o vector_cpu vector_cpu.cpp
+# ./vector_cpu 
+[1000] C0 = 103.786217 (took 0.010 s)
+[10000] C0 = 100.480774 (took 0.005 s)
+[100000] C0 = 102.929886 (took 0.028 s)
+[1000000] C0 = 103.274300 (took 0.132 s)
+[10000000] C0 = 91.898972 (took 1.305 s)
+[100000000] C0 = 97.871086 (took 12.999 s)
+[10000000] C0 = 96.926407 (took 1.805 s)
+#
+# nvc++ -Mvect -mp -o vector_cpu vector_cpu.cpp
+# ./vector_cpu 
+[1000] C0 = 103.786217 (took 0.002 s)
+[10000] C0 = 100.480774 (took 0.002 s)
+[100000] C0 = 102.929886 (took 0.005 s)
+[1000000] C0 = 103.274300 (took 0.037 s)
+[10000000] C0 = 91.898972 (took 0.341 s)
+[100000000] C0 = 97.871086 (took 3.500 s)
+[10000000] C0 = 96.926407 (took 0.224 s)
+# # Compare to loop_omp in session_1
+#
+# nvc++ -mp=gpu -gpu=managed -o vector_gpu vector_gpu.cpp
+# ./vector_gpu
+[1000] C0 = 103.786224 (took 0.005 s)
+[10000] C0 = 100.480774 (took 0.004 s)
+[100000] C0 = 102.929886 (took 0.006 s)
+[1000000] C0 = 103.274300 (took 0.016 s)
+[10000000] C0 = 91.898972 (took 0.089 s)
+[100000000] C0 = 97.871086 (took 0.900 s)
+Fatal error: expression 'HX_CU_CALL_CHECK(p_cuStreamSynchronize(stream[dev]))' (value 1) is not equal to expression 'HX_SUCCESS' (value 0)
+Aborted (core dumped)
+#
+# nvc++ -mp=gpu -gpu=unified -o vector_gpu vector_gpu.cpp
+# ./vector_gpu
+Accelerator Fatal Error: The application was compiled with -gpu=unified, but this platform does not support Unified Memory.
+Please consult the NVIDIA HPC Compilers User's Guide for details.
+#
+# # on Grace Hopper node
+# nvc++ -mp=gpu -gpu=unified -o vector_gpu vector_gpu.cpp
+# ./vector_gpu
+[1000] C0 = 103.786224 (took 0.003 s)
+[10000] C0 = 100.480774 (took 0.002 s)
+[100000] C0 = 102.929886 (took 0.002 s)
+[1000000] C0 = 103.274300 (took 0.004 s)
+[10000000] C0 = 91.898972 (took 0.029 s)
+[100000000] C0 = 97.871086 (took 0.267 s)
+[10000000] C0 = 96.926414 (took 0.036 s)
+#
+#
+# nvc++ -mp=gpu -o vector_gpu_full vector_gpu_managed.cpp
+# ./vector_gpu_full
+[10000000] C0 = 103.786224 (took 0.174 s)
+Failing in Thread:1
+Accelerator Fatal Error: call to cuStreamSynchronize returned error 700 (CUDA_ERROR_ILLEGAL_ADDRESS): Illegal address during kernel execution
+ File: /tmp/igor/vector_gpu_managed.cpp
+ Function: _Z7computei:15
+ Line: 43
+# nvc++ -mp=gpu -gpu=managed -o vector_gpu_managed vector_gpu_managed.cpp
+# ./vector_gpu_managed
+[10000000] C0 = 103.786224 (took 0.175 s)
+[1000] C0 = 102.808266 (took 0.001 s)
+[10000] C0 = 100.324333 (took 0.001 s)
+[100000] C0 = 97.012688 (took 0.002 s)
+[1000000] C0 = 96.479721 (took 0.007 s)
+[10000000] C0 = 97.871086 (took 0.055 s)
+[100000000] C0 = 88.963860 (took 0.528 s)
+#
+#
+# nvc++ -Mvect -mp -o dyn_cpu dyn_cpu.cpp
+# ./dyn_cpu 
+[1000] C0 = 103.786217 (22) (took 0.016 s)
+[10000] C0 = 100.480774 (20) (took 0.003 s)
+[100000] C0 = 102.929886 (25) (took 0.014 s)
+[1000000] C0 = 103.274300 (23) (took 0.107 s)
+[10000000] C0 = 91.898972 (13) (took 0.564 s)
+[100000000] C0 = 97.871086 (18) (took 3.583 s)
+#
+# nvc++ -mp=gpu -gpu=managed -o dyn_gpu dyn_gpu.cpp
+# ./dyn_gpu
+[1000] C0 = 103.786224 (22) (took 0.007 s)
+[10000] C0 = 100.480774 (20) (took 0.006 s)
+[100000] C0 = 102.929886 (25) (took 0.007 s)
+[1000000] C0 = 103.274300 (23) (took 0.018 s)
+[10000000] C0 = 91.898972 (13) (took 0.076 s)
+[100000000] C0 = 97.871086 (18) (took 0.906 s)
+#
+#
+# nvc++ -Mvect -mp -c -o loop_cpu_func_ext.o loop_cpu_func_ext.cpp
+# nvc++ -Mvect -mp -o loop_cpu_func loop_cpu_func.cpp loop_cpu_func_ext.o
+# ./loop_cpu_func
+[1000] inline C0 = 103.786217 (took 0.009 s)
+[1000] ext C0 = 103.786217 (took 0.001 s)
+[1000] block C0 = 103.786217 (took 0.001 s)
+[1000] ext block C0 = 103.786217 (took 0.001 s)
+[10000] inline C0 = 100.480774 (took 0.001 s)
+[10000] ext C0 = 100.480774 (took 0.002 s)
+[10000] block C0 = 100.480774 (took 0.001 s)
+[10000] ext block C0 = 100.480774 (took 0.001 s)
+[100000] inline C0 = 102.929886 (took 0.003 s)
+[100000] ext C0 = 102.929886 (took 0.012 s)
+[100000] block C0 = 102.929886 (took 0.003 s)
+[100000] ext block C0 = 102.929886 (took 0.003 s)
+[1000000] inline C0 = 103.274300 (took 0.017 s)
+[1000000] ext C0 = 103.274300 (took 0.114 s)
+[1000000] block C0 = 103.274300 (took 0.020 s)
+[1000000] ext block C0 = 103.274300 (took 0.020 s)
+[10000000] inline C0 = 91.898972 (took 0.222 s)
+[10000000] ext C0 = 91.898972 (took 0.600 s)
+[10000000] block C0 = 91.898972 (took 0.177 s)
+[10000000] ext block C0 = 91.898972 (took 0.176 s)
+[100000000] inline C0 = 97.871086 (took 2.806 s)
+[100000000] ext C0 = 97.871086 (took 5.789 s)
+[100000000] block C0 = 97.871086 (took 2.318 s)
+[100000000] ext block C0 = 97.871086 (took 2.081 s)
+#
+# nvc++ -mp=gpu -c -o loop_gpu_func_ext.o loop_gpu_func_ext.cpp
+# nvc++ -mp=gpu -o loop_gpu_func loop_gpu_func.cpp loop_gpu_func_ext.o
+# ./loop_gpu_func
+[1000] inline C0 = 103.786224 (took 0.109 s)
+[1000] ext C0 = 103.786224 (took 0.001 s)
+[1000] block C0 = 103.786224 (took 0.005 s)
+[1000] ext block C0 = 103.786224 (took 0.005 s)
+[10000] inline C0 = 100.480774 (took 0.001 s)
+[10000] ext C0 = 100.480774 (took 0.001 s)
+[10000] block C0 = 100.480774 (took 0.006 s)
+[10000] ext block C0 = 100.480774 (took 0.006 s)
+[100000] inline C0 = 102.929886 (took 0.001 s)
+[100000] ext C0 = 102.929886 (took 0.001 s)
+[100000] block C0 = 102.929886 (took 0.008 s)
+[100000] ext block C0 = 102.929886 (took 0.008 s)
+[1000000] inline C0 = 103.274300 (took 0.006 s)
+[1000000] ext C0 = 103.274300 (took 0.006 s)
+[1000000] block C0 = 103.274300 (took 0.028 s)
+[1000000] ext block C0 = 103.274300 (took 0.028 s)
+[10000000] inline C0 = 91.898972 (took 0.049 s)
+[10000000] ext C0 = 91.898972 (took 0.048 s)
+[10000000] block C0 = 91.898972 (took 1.036 s)
+[10000000] ext block C0 = 91.898972 (took 0.988 s)
+[100000000] inline C0 = 97.871086 (took 0.496 s)
+[100000000] ext C0 = 97.871086 (took 0.482 s)
+[100000000] block C0 = 97.871086 (took 10.866 s)
+[100000000] ext block C0 = 97.871086 (took 10.618 s)
+#
+# nvc++ -mp=gpu -c -o block_gpu_func_ext.o block_gpu_func_ext.cpp
+# nvc++ -mp=gpu -o block_gpu_func block_gpu_func.cpp block_gpu_func_ext.o
+# ./block_gpu_func
+[1000] plain C0 = 103.786224 (took 0.163 s)
+[1000] naive block C0 = 103.786224 (took 0.005 s)
+[1000] naive block func C0 = 103.786224 (took 0.005 s)
+[1000] block C0 = 103.786224 (took 0.003 s)
+[1000] func block C0 = 103.786224 (took 0.001 s)
+[1000] ext block C0 = 103.786224 (took 0.004 s)
+[1000] loop plain C0 = 103.786224 (took 0.001 s)
+[1000] loop block C0 = 103.786224 (took 0.001 s)
+[10000] plain C0 = 100.480774 (took 0.001 s)
+[10000] naive block C0 = 100.480774 (took 0.007 s)
+[10000] naive block func C0 = 100.480774 (took 0.007 s)
+[10000] block C0 = 100.480774 (took 0.003 s)
+[10000] func block C0 = 100.480774 (took 0.001 s)
+[10000] ext block C0 = 100.480774 (took 0.005 s)
+[10000] loop plain C0 = 100.480774 (took 0.002 s)
+[10000] loop block C0 = 100.480774 (took 0.001 s)
+[100000] plain C0 = 102.929886 (took 0.002 s)
+[100000] naive block C0 = 102.929886 (took 0.008 s)
+[100000] naive block func C0 = 102.929886 (took 0.008 s)
+[100000] block C0 = 102.929886 (took 0.007 s)
+[100000] func block C0 = 102.929886 (took 0.002 s)
+[100000] ext block C0 = 102.929886 (took 0.016 s)
+[100000] loop plain C0 = 102.929886 (took 0.013 s)
+[100000] loop block C0 = 102.929886 (took 0.002 s)
+[1000000] plain C0 = 103.274300 (took 0.008 s)
+[1000000] naive block C0 = 103.274300 (took 0.029 s)
+[1000000] naive block func C0 = 103.274300 (took 0.028 s)
+[1000000] block C0 = 103.274300 (took 0.043 s)
+[1000000] func block C0 = 103.274300 (took 0.006 s)
+[1000000] ext block C0 = 103.274300 (took 0.118 s)
+[1000000] loop plain C0 = 103.274300 (took 0.100 s)
+[1000000] loop block C0 = 103.274300 (took 0.006 s)
+[10000000] plain C0 = 91.898972 (took 0.045 s)
+[10000000] naive block C0 = 91.898972 (took 1.030 s)
+[10000000] naive block func C0 = 91.898972 (took 1.032 s)
+[10000000] block C0 = 91.898972 (took 0.402 s)
+[10000000] func block C0 = 91.898972 (took 0.052 s)
+[10000000] ext block C0 = 91.898972 (took 1.135 s)
+[10000000] loop plain C0 = 91.898972 (took 1.006 s)
+[10000000] loop block C0 = 91.898972 (took 0.056 s)
+[100000000] plain C0 = 97.871086 (took 0.452 s)
+[100000000] naive block C0 = 97.871086 (took 10.772 s)
+[100000000] naive block func C0 = 97.871086 (took 10.776 s)
+[100000000] block C0 = 97.871086 (took 4.004 s)
+[100000000] func block C0 = 97.871086 (took 0.538 s)
+[100000000] ext block C0 = 97.871086 (took 11.526 s)
+[100000000] loop plain C0 = 97.871086 (took 10.214 s)
+[100000000] loop block C0 = 97.871086 (took 0.552 s)
+#
