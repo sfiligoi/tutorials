@@ -1,0 +1,21 @@
+Tutorial hands-on
+=================
+
+The tutorial hands-ons in this tree have been developed
+for execution in containerized environments
+(ideally Kubernetes, as in the National Research Platform)
+using NVIDIA GPUs.
+
+Most examples should work in other environments,
+but may need different compilaton steps.
+
+The examples also assume at least 10 CPU cores,
+8 GB of system memory and 8 GB of GPU memory.
+
+Recommended container image
+---------------------------
+
+All tutorial hand-ons can be run inside the
+nvcr.io/nvidia/nvhpc:24.7-devel-cuda_multi-ubuntu22.04
+container.
+
