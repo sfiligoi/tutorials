@@ -1,0 +1,60 @@
+# nvc++ --c++17 -Mvect -stdpar=multicore -o loop_c17 loop_c17.cpp
+# ./loop_c17 
+[1000] C0 = 103.786217 (took 0.0132 s)
+[10000] C0 = 100.480774 (took 0.0033 s)
+[100000] C0 = 102.929886 (took 0.0032 s)
+[1000000] C0 = 103.274300 (took 0.0018 s)
+[10000000] C0 = 91.898972 (took 0.0022 s)
+[100000000] C0 = 97.871086 (took 0.0022 s)
+#
+# nvc++ --c++17 -stdpar=gpu -o loop_c17 loop_c17.cpp
+# ./loop_c17 
+[1000] C0 = 103.786224 (took 0.0012 s)
+[10000] C0 = 100.480774 (took 0.0008 s)
+[100000] C0 = 102.929886 (took 0.0008 s)
+[1000000] C0 = 103.274300 (took 0.0009 s)
+[10000000] C0 = 91.898972 (took 0.0010 s)
+[100000000] C0 = 97.871086 (took 0.0013 s)
+#
+# nvc++ --c++17 -Mvect -o loop_c17_serial loop_c17_serial.cpp
+# ./loop_c17_serial
+[1000] C0 = 103.786217 (took 0.000006 s)
+[10000] C0 = 100.480774 (took 0.000006 s)
+[100000] C0 = 102.929886 (took 0.000006 s)
+[1000000] C0 = 103.274300 (took 0.000006 s)
+[10000000] C0 = 91.898972 (took 0.000006 s)
+[100000000] C0 = 97.871086 (took 0.000007 s)
+#
+#
+# # In the Kokkos tree setup
+# cmake -B build_omp -DKokkos_ENABLE_OPENMP=ON && cd build_omp && make
+...
+-- Built-in Execution Spaces:
+--     Device Parallel: NoTypeDefined
+--     Host Parallel: Kokkos::OpenMP
+--       Host Serial: NONE
+...
+# ./loop_kokkos 
+[1000] C0 = 103.786217 (took 0.0027 s)
+[10000] C0 = 100.480774 (took 0.0111 s)
+[100000] C0 = 102.929886 (took 0.0408 s)
+[1000000] C0 = 103.274300 (took 0.2721 s)
+[10000000] C0 = 91.898972 (took 2.8156 s)
+[100000000] C0 = 97.871086 (took 28.0155 s)
+#
+#
+# cmake -B build_cuda -DKokkos_ENABLE_CUDA=ON && cd build_cuda && make
+...
+-- Built-in Execution Spaces:
+--     Device Parallel: Kokkos::Cuda
+--     Host Parallel: NoTypeDefined
+--       Host Serial: SERIAL
+...
+# ./loop_kokkos 
+[1000] C0 = 103.786224 (took 0.0007 s)
+[10000] C0 = 100.480774 (took 0.0006 s)
+[100000] C0 = 102.929886 (took 0.0006 s)
+[1000000] C0 = 103.274300 (took 0.0011 s)
+[10000000] C0 = 91.898972 (took 0.0067 s)
+[100000000] C0 = 97.871086 (took 0.2401 s)
+#

@@ -1,0 +1,22 @@
+Kokkos installation
+===================
+
+Kokkos was downloaded from the Web, following instructions at
+https://github.com/kokkos/kokkos
+
+Note: The Kokkos make files rely on bc, which is often not installed.
+
+Install with
+apt-get update && apt-get install bc
+
+Kokkos installation for the purpose of this hands-on
+----------------------------------------------------
+
+mkdir -p /opt/kokkos
+cd /opt/kokkos
+wget https://github.com/kokkos/kokkos/archive/refs/tags/4.3.01.tar.gz
+tar -xzf 4.3.01.tar.gz && mv kokkos-4.3.01 kokkos
+cd kokkos
+mkdir <tutorial_dir_name> && cd <tutorial_dir_name>
+# The tutorial CMake file assumes to be in /opt/kokkos/kokkos/<something> 
+

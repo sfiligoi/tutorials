@@ -10,7 +10,7 @@ A tutorial at [eScience24](http://www.escience-conference.org/2024/tutorials).
 - [Beyond basics in parallelism lecture](lectures/escience24_acc_lecture_3_beyond_basics.pdf)
 - [More complex parallel programming hands-on](handson/session_2/README.md)
 - [Declarative parallelism in C++ lecture](lectures/escience24_acc_lecture_4_decl.pdf)
-- Explicit vs compiler driven acceleration hands-on
+- [Declarative parallel programming and on-your-own hands-on](handson/session_3/README.md)
 - [Standard libraries and acceleration lecture](lectures/escience24_acc_lecture_5_stdlib.pdf)
 - Accelerated FFT hands-on
 
