@@ -1,0 +1,36 @@
+# nvc++ -Mvect -o fft_serial fft_serial.cpp -lfftw3f
+# ./fft_serial
+[50] A = 260.748718 (took 0.054 s)
+[100] A = 269.151276 (took 0.180 s)
+[200] A = 267.177307 (took 0.678 s)
+[400] A = 263.867615 (took 2.871 s)
+[800] A = 265.242249 (took 13.911 s)
+[1600] skipped
+#
+# nvc++ -Mvect -mp -o fft_omp fft_omp.cpp -lfftw3f
+# ./fft_omp
+[50] A = 260.748718 (took 0.013 s)
+[100] A = 269.151276 (took 0.036 s)
+[200] A = 267.177307 (took 0.107 s)
+[400] A = 263.867615 (took 0.332 s)
+[800] A = 265.242279 (took 1.930 s)
+[1600] A = 258.961792 (took 9.066 s)
+#
+# nvc++ -Mvect -mp -o fft_batch fft_batch.cpp -lfftw3f_threads -lfftw3f
+# ./fft_batch
+[50] A = 260.748718 (took 0.035 s)
+[100] A = 269.151276 (took 0.065 s)
+[200] A = 267.177368 (took 0.157 s)
+[400] A = 263.867615 (took 0.548 s)
+[800] A = 265.242279 (took 2.262 s)
+[1600] A = 258.961792 (took 9.910 s)
+#
+# nvc++ -mp=gpu -o fft_gpu fft_gpu.cpp -cudalib=cufft
+# ./fft_gpu
+[50] A = 260.748718 (took 0.005 s)
+[100] A = 269.151306 (took 0.009 s)
+[200] A = 267.177307 (took 0.035 s)
+[400] A = 263.867645 (took 0.137 s)
+[800] A = 265.242249 (took 0.543 s)
+[1600] A = 258.961731 (took 2.262 s)
+#

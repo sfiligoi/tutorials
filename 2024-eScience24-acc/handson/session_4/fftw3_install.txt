@@ -1,0 +1,8 @@
+FFTW3 installation
+==================
+
+FFTW3 does not come pre-installed with the nvc++ container used in this tutorial.
+
+All the necessary include files and libraries are however available for installation:
+apt-get update && apt-get install libfftw3-dev
+

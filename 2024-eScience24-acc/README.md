@@ -1,7 +1,6 @@
 # Modern accelerated programming
 A tutorial at [eScience24](http://www.escience-conference.org/2024/tutorials).
 
-
 ## Content
 
 - [Overview of modern HW lecture](lectures/escience24_acc_lecture_1_modern_hw.pdf)
@@ -12,6 +11,6 @@ A tutorial at [eScience24](http://www.escience-conference.org/2024/tutorials).
 - [Declarative parallelism in C++ lecture](lectures/escience24_acc_lecture_4_decl.pdf)
 - [Declarative parallel programming and on-your-own hands-on](handson/session_3/README.md)
 - [Standard libraries and acceleration lecture](lectures/escience24_acc_lecture_5_stdlib.pdf)
-- Accelerated FFT hands-on
+- [Accelerating FFT compute hands-on](handson/session_4/README.md)
 
 
