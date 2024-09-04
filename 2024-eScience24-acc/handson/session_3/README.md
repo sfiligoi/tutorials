@@ -2,6 +2,7 @@
 
 ## Declarative parallel programming
 
+- C++17 transform [vector_transform.cpp](./vector_transform.cpp)
 - C++17 for_each [loop_c17.cpp](./loop_c17.cpp) ( serial version [loop_c17_serial.cpp](./loop_c17_serial.cpp) )
 - Kokkos [loop_kokkos.cpp](./loop_kokkos.cpp) and [CMakeLists.txt](./CMakeLists.txt)
 

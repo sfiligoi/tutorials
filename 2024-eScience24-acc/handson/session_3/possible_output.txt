@@ -1,3 +1,23 @@
+# nvc++ --c++17 -Mvect -stdpar=multicore -o vector_transform vector_transform.cpp
+# ./vector_transform 
+[1000] C0 = 103.786224 (took 0.0083 s)
+[10000] C0 = 100.480774 (took 0.0009 s)
+[100000] C0 = 102.929886 (took 0.0026 s)
+[1000000] C0 = 103.274300 (took 0.0226 s)
+[10000000] C0 = 91.898972 (took 0.4050 s)
+[100000000] C0 = 97.871086 (took 4.9359 s)
+# # compare to session_2's vector_cpu outputs
+#
+# nvc++ --c++17 -stdpar=gpu -o vector_transform vector_transform.cpp
+# ./vector_transform 
+[1000] C0 = 103.786224 (took 0.0020 s)
+[10000] C0 = 100.480774 (took 0.0017 s)
+[100000] C0 = 102.929886 (took 0.0022 s)
+[1000000] C0 = 103.274300 (took 0.0098 s)
+[10000000] C0 = 91.898972 (took 0.0836 s)
+[100000000] C0 = 97.871086 (took 0.7274 s)
+# # compare to session_2's vector_gpu outputs
+#
 # nvc++ --c++17 -Mvect -stdpar=multicore -o loop_c17 loop_c17.cpp
 # ./loop_c17 
 [1000] C0 = 103.786217 (took 0.0132 s)
