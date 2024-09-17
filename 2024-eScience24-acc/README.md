@@ -5,8 +5,8 @@ A tutorial at [eScience24](http://www.escience-conference.org/2024/tutorials).
 
 - 09:00 - [Overview of modern HW lecture](lectures/escience24_acc_lecture_1_modern_hw.pdf)
 - 09:30 - [Intro C/C++ pragma-based parallelism lecture](lectures/escience24_acc_lecture_2_intro_mp.pdf)
-- 09:40 - [Intro to parallel programming hands-on](handson/session_1/README.md)
-- 10:10 - [Beyond basics in parallelism lecture](lectures/escience24_acc_lecture_3_beyond_basics.pdf)
+- 09:45 - [Intro to parallel programming hands-on](handson/session_1/README.md)
+- 10:15 - [Beyond basics in parallelism lecture](lectures/escience24_acc_lecture_3_beyond_basics.pdf)
 - 10:30 - Break
 - 11:00 - [More complex parallel programming hands-on](handson/session_2/README.md)
 - 11:20 - [Declarative parallelism in C++ lecture](lectures/escience24_acc_lecture_4_decl.pdf)
