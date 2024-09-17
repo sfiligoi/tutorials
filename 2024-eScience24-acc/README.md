@@ -28,4 +28,7 @@ The needed configuration file can be found [here](https://drive.google.com/file/
 Several GPU pods have been provisioned in Nautilus.  
 Please claim one of the 5 slots at a pod in [this spreadsheet](https://docs.google.com/spreadsheets/d/17SroOWnkjnwWWWKkKVHKb1Br_u__9cNJnHco5NjfNKc/edit?usp=share_link). Use only the pod you signed up for, to avoid excessive contention.
 
+To get onto the node, use `kubectl exec your-podname -it -- /bin/bash`. Once inside, create your own subdirectory under `/tmp/` and work in there.
+
+All the handson material can be accessed by clonning this git repository with `git clone https://github.com/sfiligoi/tutorials.git`.
 
