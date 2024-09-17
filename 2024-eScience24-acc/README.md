@@ -26,6 +26,6 @@ Installation instructions are available at [https://kubernetes.io/docs/tasks/too
 The needed configuration file can be found [here](https://drive.google.com/file/d/1BOy08Dar4ZZTUVi9EHe583-KVQ6HLpMG/view?usp=sharing).
 
 Several GPU pods have been provisioned in Nautilus.  
-Please claim one of the 5 slots at a pod in [this spereadsheet](https://docs.google.com/spreadsheets/d/17SroOWnkjnwWWWKkKVHKb1Br_u__9cNJnHco5NjfNKc/edit?usp=share_link). Use only the pod you signed up for, to avoid excessive contention.
+Please claim one of the 5 slots at a pod in [this spreadsheet](https://docs.google.com/spreadsheets/d/17SroOWnkjnwWWWKkKVHKb1Br_u__9cNJnHco5NjfNKc/edit?usp=share_link). Use only the pod you signed up for, to avoid excessive contention.
 
 
