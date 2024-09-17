@@ -13,7 +13,7 @@
 
 ## Using functions in parallel code
 
-- Multi-threaded version [loop_gpu_func.cpp](./loop_cpu_func.cpp) and [loop_cpu_func_ext.cpp](./loop_cpu_func_ext.cpp)
+- Multi-threaded version [loop_cpu_func.cpp](./loop_cpu_func.cpp) and [loop_cpu_func_ext.cpp](./loop_cpu_func_ext.cpp)
 - GPU version [loop_gpu_func.cpp](./loop_gpu_func.cpp) and [loop_gpu_func_ext.cpp](./loop_gpu_func_ext.cpp)
 - Improved GPU version [block_gpu_func.cpp](./block_gpu_func.cpp) and [block_gpu_func_ext.cpp](./block_gpu_func_ext.cpp)
 
