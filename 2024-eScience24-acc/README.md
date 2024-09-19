@@ -20,13 +20,10 @@ A tutorial at [eScience24](http://www.escience-conference.org/2024/tutorials).
 The hands-on part is performend on the [National Research Platform](https://nationalresearchplatform.org),
 using Kubernetes-based Nautilus.
 
+Note: The tutorial credentials have been revoked. Consider becoming a [regular Nautilus user](https://docs.nationalresearchplatform.org) to continue to use the NRP.
+
 To access Nautilus, participant must use the `kubectl` command.
 Installation instructions are available at [https://kubernetes.io/docs/tasks/tools/](https://kubernetes.io/docs/tasks/tools/).
-
-The needed configuration file can be found [here](https://drive.google.com/file/d/1BOy08Dar4ZZTUVi9EHe583-KVQ6HLpMG/view?usp=sharing).
-
-Several GPU pods have been provisioned in Nautilus.  
-Please claim one of the 5 slots at a pod in [this spreadsheet](https://docs.google.com/spreadsheets/d/17SroOWnkjnwWWWKkKVHKb1Br_u__9cNJnHco5NjfNKc/edit?usp=share_link). Use only the pod you signed up for, to avoid excessive contention.
 
 To get onto the node, use `kubectl exec your-podname -it -- /bin/bash`. Once inside, create your own subdirectory under `/tmp/` and work in there.
 
