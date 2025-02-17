@@ -40,7 +40,7 @@ int main(int argc, const char *argv[]) {
 	for (uint32_t i=0; i<n_els; i+=VECT) {
           uTFLOAT u;
 	  for (uint32_t a=0; a<VECT; a++) {
-	     u.arr[a] = start_val+TFLOAT(0.00001)*(i/2) - TFLOAT(0.002)*(i%2);
+	     u.arr[a] = start_val+TFLOAT(0.00001)*((i+a)/2) - TFLOAT(0.002)*((i+a)%2);
 	  }
 	  vfloat val = u.val;
 	  vfloat m1 = {TFLOAT(1.001)};
