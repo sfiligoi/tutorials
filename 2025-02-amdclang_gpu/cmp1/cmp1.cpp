@@ -9,10 +9,16 @@
 #endif
 
 int main(int argc, const char *argv[]) {
-	constexpr uint32_t n_els = 240*1024+128; // 128-aligned, but not a multiple of 1k
+        if (argc!=3) {
+		fprintf(stderr,"Error, wrong number of arguments\n");
+		fprintf(stderr,"Usage:\n\t%s <size_multiplier> <comp_const>\n",argv[0]);
+		return 1;
+	}
+	const uint32_t n_els = std::stol(argv[1])*240*1024+128; // 128-aligned, but not a multiple of 1k
+	const TFLOAT start_val = std::stof(argv[2]);
+
 	constexpr uint32_t n_comp = 3000*1024-128; // 128-aligned, but not a multiple of 1k
 	TFLOAT *buf = new TFLOAT[n_els];
-	TFLOAT start_val = std::stof(argv[1]);
 
 	auto t1 = std::chrono::high_resolution_clock::now();
 #ifdef OMPGPU
