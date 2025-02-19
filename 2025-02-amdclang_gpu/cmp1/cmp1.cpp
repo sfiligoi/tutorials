@@ -41,6 +41,7 @@ int main(int argc, const char *argv[]) {
 	}
 	auto t2 = std::chrono::high_resolution_clock::now();
 
+	// sort is here just to make all the buffer relevant
 	std::sort(buf,buf+n_els);
 	auto t3 = std::chrono::high_resolution_clock::now();
         printf("Result: %f\n",double(buf[0]));
