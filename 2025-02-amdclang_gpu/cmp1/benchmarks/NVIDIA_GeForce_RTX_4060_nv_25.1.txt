@@ -1,0 +1,159 @@
+$ time ./cmp1_nv_gpu 1 3.2
+Result: -0.000204
+compute 0.731 s sort 0.002 s
+
+real	0m0.751s
+user	0m0.683s
+sys	0m0.066s
+$ time ./cmp1_splitx4_nv_gpu 1 3.2
+Result: -0.000204
+compute 0.765 s sort 0.002 s
+
+real	0m0.786s
+user	0m0.725s
+sys	0m0.058s
+$ time ./cmp1_uni_nv_gpu 1 3.2
+Result: -0.000204
+compute 0.752 s sort 0.002 s
+
+real	0m0.809s
+user	0m0.705s
+sys	0m0.064s
+
+$ time ./cmp1_nv_gpu 10 3.2
+Result: -0.000204
+compute 6.617 s sort 0.017 s
+
+real	0m6.652s
+user	0m6.578s
+sys	0m0.074s
+$ time ./cmp1_splitx4_nv_gpu 10 3.2
+Result: -0.000204
+compute 6.654 s sort 0.017 s
+
+real	0m6.690s
+user	0m6.627s
+sys	0m0.062s
+$ time ./cmp1_uni_nv_gpu 10 3.2
+Result: -0.000204
+compute 6.825 s sort 0.017 s
+
+real	0m6.862s
+user	0m6.788s
+sys	0m0.073s
+
+$ nvc++ --version
+
+nvc++ 25.1-0 64-bit target on x86-64 Linux -tp alderlake 
+NVIDIA Compilers and Tools
+Copyright (c) 2025, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+$ pgaccelinfo 
+
+CUDA Driver Version:           12040
+NVRM version:                  NVIDIA UNIX x86_64 Kernel Module  550.120  Fri Sep 13 10:10:01 UTC 2024
+
+Device Number:                 0
+Device Name:                   NVIDIA GeForce RTX 4060
+Device Revision Number:        8.9
+Global Memory Size:            8318222336
+Number of Multiprocessors:     24
+Concurrent Copy and Execution: Yes
+Total Constant Memory:         65536
+Total Shared Memory per Block: 49152
+Registers per Block:           65536
+Warp Size:                     32
+Maximum Threads per Block:     1024
+Maximum Block Dimensions:      1024, 1024, 64
+Maximum Grid Dimensions:       2147483647 x 65535 x 65535
+Maximum Memory Pitch:          2147483647B
+Texture Alignment:             512B
+Clock Rate:                    2460 MHz
+Execution Timeout:             Yes
+Integrated Device:             No
+Can Map Host Memory:           Yes
+Compute Mode:                  default
+Concurrent Kernels:            Yes
+ECC Enabled:                   No
+Memory Clock Rate:             8501 MHz
+Memory Bus Width:              128 bits
+L2 Cache Size:                 25165824 bytes
+Max Threads Per SMP:           1536
+Async Engines:                 2
+Unified Addressing:            Yes
+Managed Memory:                Yes
+Concurrent Managed Memory:     Yes
+Preemption Supported:          Yes
+Cooperative Launch:            Yes
+Unified Memory:                No
+Memory Models Flags:           -gpu=mem:separate, -gpu=mem:managed
+Default Target:                cc89
+$ nvidia-smi
+Sat Mar  8 09:23:28 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.120                Driver Version: 550.120        CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4060        Off |   00000000:01:00.0 Off |                  N/A |
+|  0%   37C    P8             N/A /  115W |      19MiB /   8188MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
++-----------------------------------------------------------------------------------------+
+$ lscpu
+Architecture:             x86_64
+  CPU op-mode(s):         32-bit, 64-bit
+  Address sizes:          39 bits physical, 48 bits virtual
+  Byte Order:             Little Endian
+CPU(s):                   12
+  On-line CPU(s) list:    0-11
+Vendor ID:                GenuineIntel
+  Model name:             12th Gen Intel(R) Core(TM) i5-12400F
+    CPU family:           6
+    Model:                151
+    Thread(s) per core:   2
+    Core(s) per socket:   6
+    Socket(s):            1
+    Stepping:             5
+    CPU(s) scaling MHz:   18%
+    CPU max MHz:          4400.0000
+    CPU min MHz:          800.0000
+    BogoMIPS:             4992.00
+    Flags:                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm consta
+                          nt_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 
+                          sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd 
+                          ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb 
+                          intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_
+                          req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize arch_lbr ibt flush_l1d arch_capabilities
+Virtualization features:  
+  Virtualization:         VT-x
+Caches (sum of all):      
+  L1d:                    288 KiB (6 instances)
+  L1i:                    192 KiB (6 instances)
+  L2:                     7.5 MiB (6 instances)
+  L3:                     18 MiB (1 instance)
+NUMA:                     
+  NUMA node(s):           1
+  NUMA node0 CPU(s):      0-11
+Vulnerabilities:          
+  Gather data sampling:   Not affected
+  Itlb multihit:          Not affected
+  L1tf:                   Not affected
+  Mds:                    Not affected
+  Meltdown:               Not affected
+  Mmio stale data:        Not affected
+  Reg file data sampling: Not affected
+  Retbleed:               Not affected
+  Spec rstack overflow:   Not affected
+  Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl
+  Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+  Spectre v2:             Mitigation; Enhanced / Automatic IBRS; IBPB conditional; RSB filling; PBRSB-eIBRS SW sequence; BHI BHI_DIS_S
+  Srbds:                  Not affected
+  Tsx async abort:        Not affected
