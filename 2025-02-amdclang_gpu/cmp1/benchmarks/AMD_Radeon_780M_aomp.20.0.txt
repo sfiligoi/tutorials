@@ -1,0 +1,243 @@
+$ time ./cmp1_amd_gpu 1 3.2
+Result: -0.000204
+compute 2.560 s sort 0.002 s
+
+real	0m2.616s
+user	0m2.558s
+sys	0m0.055s
+$ time ./cmp1_vectx4_amd_gpu 1 3.2
+Result: -0.000204
+compute 1.883 s sort 0.006 s
+
+real	0m1.942s
+user	0m1.884s
+sys	0m0.055s
+$ time ./cmp1_splitx4_amd_gpu 1 3.2
+Result: -0.000204
+compute 2.489 s sort 0.002 s
+
+real	0m2.543s
+user	0m2.487s
+sys	0m0.053s
+$ time ./cmp1_uni_amd_gpu 1 3.2
+Result: -0.000204
+compute 1.976 s sort 0.007 s
+
+real	0m2.038s
+user	0m1.982s
+sys	0m0.054s
+
+$ time ./cmp1_amd_gpu 10 3.2
+Result: -0.000204
+compute 24.181 s sort 0.017 s
+
+real	0m24.252s
+user	0m24.187s
+sys	0m0.061s
+$ time ./cmp1_vectx4_amd_gpu 10 3.2
+Result: -0.000204
+compute 17.682 s sort 0.064 s
+
+real	0m17.808s
+user	0m17.734s
+sys	0m0.070s
+$ time ./cmp1_splitx4_amd_gpu 10 3.2
+Result: -0.000204
+compute 23.072 s sort 0.017 s
+
+real	0m23.144s
+user	0m23.082s
+sys	0m0.058s
+$ time ./cmp1_uni_amd_gpu 10 3.2
+Result: -0.000204
+compute 17.849 s sort 0.070 s
+
+real	0m17.980s
+user	0m17.912s
+sys	0m0.064s
+
+$ amdclang++ --version
+AOMP_STANDALONE_20.0-1 clang version 20.0.0_AOMP_STANDALONE_20.0-1 (https://github.com/ROCm/llvm-project d288a0d8941a9c6b6dfea9ebe9a3a8712953a35e)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /home/sfiligoi/github/unifrac-binaries/aomp_clang/usr/lib/aomp_20.0-1/lib/llvm/bin
+Build config: +assertions
+Configuration file: /home/sfiligoi/github/unifrac-binaries/aomp_clang/usr/lib/aomp_20.0-1/lib/llvm/bin/clang++.cfg
+$ rocminfo 
+ROCk module is loaded
+=====================    
+HSA System Attributes    
+=====================    
+Runtime Version:         1.14
+Runtime Ext Version:     1.6
+System Timestamp Freq.:  1000.000000MHz
+Sig. Max Wait Duration:  18446744073709551615 (0xFFFFFFFFFFFFFFFF) (timestamp count)
+Machine Model:           LARGE                              
+System Endianness:       LITTLE                             
+Mwaitx:                  DISABLED
+DMAbuf Support:          YES
+
+==========               
+HSA Agents               
+==========               
+*******                  
+Agent 1                  
+*******                  
+  Name:                    AMD Ryzen 9 7940HS w/ Radeon 780M Graphics
+  Uuid:                    CPU-XX                             
+  Marketing Name:          AMD Ryzen 9 7940HS w/ Radeon 780M Graphics
+  Vendor Name:             CPU                                
+  Feature:                 None specified                     
+  Profile:                 FULL_PROFILE                       
+  Float Round Mode:        NEAR                               
+  Max Queue Number:        0(0x0)                             
+  Queue Min Size:          0(0x0)                             
+  Queue Max Size:          0(0x0)                             
+  Queue Type:              MULTI                              
+  Node:                    0                                  
+  Device Type:             CPU                                
+  Cache Info:              
+    L1:                      32768(0x8000) KB                   
+  Chip ID:                 0(0x0)                             
+  ASIC Revision:           0(0x0)                             
+  Cacheline Size:          64(0x40)                           
+  Max Clock Freq. (MHz):   5263                               
+  BDFID:                   0                                  
+  Internal Node ID:        0                                  
+  Compute Unit:            16                                 
+  SIMDs per CU:            0                                  
+  Shader Engines:          0                                  
+  Shader Arrs. per Eng.:   0                                  
+  WatchPts on Addr. Ranges:1                                  
+  Memory Properties:       
+  Features:                None
+  Pool Info:               
+    Pool 1                   
+      Segment:                 GLOBAL; FLAGS: FINE GRAINED        
+      Size:                    64588836(0x3d98c24) KB             
+      Allocatable:             TRUE                               
+      Alloc Granule:           4KB                                
+      Alloc Recommended Granule:4KB                                
+      Alloc Alignment:         4KB                                
+      Accessible by all:       TRUE                               
+    Pool 2                   
+      Segment:                 GLOBAL; FLAGS: EXTENDED FINE GRAINED
+      Size:                    64588836(0x3d98c24) KB             
+      Allocatable:             TRUE                               
+      Alloc Granule:           4KB                                
+      Alloc Recommended Granule:4KB                                
+      Alloc Alignment:         4KB                                
+      Accessible by all:       TRUE                               
+    Pool 3                   
+      Segment:                 GLOBAL; FLAGS: KERNARG, FINE GRAINED
+      Size:                    64588836(0x3d98c24) KB             
+      Allocatable:             TRUE                               
+      Alloc Granule:           4KB                                
+      Alloc Recommended Granule:4KB                                
+      Alloc Alignment:         4KB                                
+      Accessible by all:       TRUE                               
+    Pool 4                   
+      Segment:                 GLOBAL; FLAGS: COARSE GRAINED      
+      Size:                    64588836(0x3d98c24) KB             
+      Allocatable:             TRUE                               
+      Alloc Granule:           4KB                                
+      Alloc Recommended Granule:4KB                                
+      Alloc Alignment:         4KB                                
+      Accessible by all:       TRUE                               
+  ISA Info:                
+*******                  
+Agent 2                  
+*******                  
+  Name:                    gfx1103                            
+  Uuid:                    GPU-XX                             
+  Marketing Name:          AMD Radeon Graphics                
+  Vendor Name:             AMD                                
+  Feature:                 KERNEL_DISPATCH                    
+  Profile:                 BASE_PROFILE                       
+  Float Round Mode:        NEAR                               
+  Max Queue Number:        128(0x80)                          
+  Queue Min Size:          64(0x40)                           
+  Queue Max Size:          131072(0x20000)                    
+  Queue Type:              MULTI                              
+  Node:                    1                                  
+  Device Type:             GPU                                
+  Cache Info:              
+    L1:                      32(0x20) KB                        
+    L2:                      2048(0x800) KB                     
+  Chip ID:                 5567(0x15bf)                       
+  ASIC Revision:           9(0x9)                             
+  Cacheline Size:          64(0x40)                           
+  Max Clock Freq. (MHz):   2799                               
+  BDFID:                   50176                              
+  Internal Node ID:        1                                  
+  Compute Unit:            12                                 
+  SIMDs per CU:            2                                  
+  Shader Engines:          1                                  
+  Shader Arrs. per Eng.:   2                                  
+  WatchPts on Addr. Ranges:4                                  
+  Coherent Host Access:    FALSE                              
+  Memory Properties:       APU
+  Features:                KERNEL_DISPATCH 
+  Fast F16 Operation:      TRUE                               
+  Wavefront Size:          32(0x20)                           
+  Workgroup Max Size:      1024(0x400)                        
+  Workgroup Max Size per Dimension:
+    x                        1024(0x400)                        
+    y                        1024(0x400)                        
+    z                        1024(0x400)                        
+  Max Waves Per CU:        32(0x20)                           
+  Max Work-item Per CU:    1024(0x400)                        
+  Grid Max Size:           4294967295(0xffffffff)             
+  Grid Max Size per Dimension:
+    x                        4294967295(0xffffffff)             
+    y                        4294967295(0xffffffff)             
+    z                        4294967295(0xffffffff)             
+  Max fbarriers/Workgrp:   32                                 
+  Packet Processor uCode:: 35                                 
+  SDMA engine uCode::      16                                 
+  IOMMU Support::          None                               
+  Pool Info:               
+    Pool 1                   
+      Segment:                 GLOBAL; FLAGS: COARSE GRAINED      
+      Size:                    32294416(0x1ecc610) KB             
+      Allocatable:             TRUE                               
+      Alloc Granule:           4KB                                
+      Alloc Recommended Granule:2048KB                             
+      Alloc Alignment:         4KB                                
+      Accessible by all:       FALSE                              
+    Pool 2                   
+      Segment:                 GLOBAL; FLAGS: EXTENDED FINE GRAINED
+      Size:                    32294416(0x1ecc610) KB             
+      Allocatable:             TRUE                               
+      Alloc Granule:           4KB                                
+      Alloc Recommended Granule:2048KB                             
+      Alloc Alignment:         4KB                                
+      Accessible by all:       FALSE                              
+    Pool 3                   
+      Segment:                 GROUP                              
+      Size:                    64(0x40) KB                        
+      Allocatable:             FALSE                              
+      Alloc Granule:           0KB                                
+      Alloc Recommended Granule:0KB                                
+      Alloc Alignment:         0KB                                
+      Accessible by all:       FALSE                              
+  ISA Info:                
+    ISA 1                    
+      Name:                    amdgcn-amd-amdhsa--gfx1103         
+      Machine Models:          HSA_MACHINE_MODEL_LARGE            
+      Profiles:                HSA_PROFILE_BASE                   
+      Default Rounding Mode:   NEAR                               
+      Default Rounding Mode:   NEAR                               
+      Fast f16:                TRUE                               
+      Workgroup Max Size:      1024(0x400)                        
+      Workgroup Max Size per Dimension:
+        x                        1024(0x400)                        
+        y                        1024(0x400)                        
+        z                        1024(0x400)                        
+      Grid Max Size:           4294967295(0xffffffff)             
+      Grid Max Size per Dimension:
+        x                        4294967295(0xffffffff)             
+        y                        4294967295(0xffffffff)             
+        z                        4294967295(0xffffffff)             
+      FBarrier Max Size:       32                                 
+*** Done ***             
