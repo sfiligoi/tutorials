@@ -1,0 +1,109 @@
+> time ./cmp1_nv_gpu 1 3.2
+Result: -0.000204
+compute 0.433 s sort 0.002 s
+
+real	0m0.545s
+user	0m0.184s
+sys	0m0.336s
+> time ./cmp1_splitx4_nv_gpu 1 3.2
+Result: -0.000204
+compute 0.467 s sort 0.002 s
+
+real	0m0.606s
+user	0m0.206s
+sys	0m0.373s
+> time ./cmp1_uni_nv_gpu 1 3.2
+Result: -0.000204
+compute 0.372 s sort 0.002 s
+
+real	0m0.484s
+user	0m0.167s
+sys	0m0.295s
+
+> time ./cmp1_nv_gpu 10 3.2
+Result: -0.000204
+compute 1.893 s sort 0.027 s
+
+real	0m2.043s
+user	0m1.626s
+sys	0m0.393s
+> time ./cmp1_splitx4_nv_gpu 10 3.2
+Result: -0.000204
+compute 1.898 s sort 0.027 s
+
+real	0m2.068s
+user	0m1.646s
+sys	0m0.392s
+> time ./cmp1_uni_nv_gpu 10 3.2
+Result: -0.000204
+compute 1.698 s sort 0.027 s
+
+real	0m1.811s
+user	0m1.521s
+sys	0m0.268s
+
+> nvc++ --version
+
+nvc++ 25.1-0 64-bit target on x86-64 Linux -tp sapphirerapids 
+NVIDIA Compilers and Tools
+Copyright (c) 2025, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+> pgaccelinfo 
+
+CUDA Driver Version:           12040
+NVRM version:                  NVIDIA UNIX x86_64 Kernel Module  550.127.05  Tue Oct  8 03:22:07 UTC 2024
+
+Device Number:                 0
+Device Name:                   NVIDIA L40
+Device Revision Number:        8.9
+Global Memory Size:            47576711168
+Number of Multiprocessors:     142
+Concurrent Copy and Execution: Yes
+Total Constant Memory:         65536
+Total Shared Memory per Block: 49152
+Registers per Block:           65536
+Warp Size:                     32
+Maximum Threads per Block:     1024
+Maximum Block Dimensions:      1024, 1024, 64
+Maximum Grid Dimensions:       2147483647 x 65535 x 65535
+Maximum Memory Pitch:          2147483647B
+Texture Alignment:             512B
+Clock Rate:                    2490 MHz
+Execution Timeout:             No
+Integrated Device:             No
+Can Map Host Memory:           Yes
+Compute Mode:                  default
+Concurrent Kernels:            Yes
+ECC Enabled:                   Yes
+Memory Clock Rate:             9001 MHz
+Memory Bus Width:              384 bits
+L2 Cache Size:                 100663296 bytes
+Max Threads Per SMP:           1536
+Async Engines:                 2
+Unified Addressing:            Yes
+Managed Memory:                Yes
+Concurrent Managed Memory:     Yes
+Preemption Supported:          Yes
+Cooperative Launch:            Yes
+Unified Memory:                No
+Memory Models Flags:           -gpu=mem:separate, -gpu=mem:managed
+Default Target:                cc89
+> nvidia-smi 
+Sat Mar  8 18:37:15 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.127.05             Driver Version: 550.127.05     CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L40                     Off |   00000000:CA:00.0 Off |                    0 |
+| N/A   26C    P8             37W /  300W |       1MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
++-----------------------------------------------------------------------------------------+
