@@ -5,6 +5,15 @@
 #include <stdlib.h>
 #include <chrono>
 
+#ifdef PREFETCH_ASM_x86
+// NVIDA HPC SDK does not implemnt __builtin_prefetch, insert ASM code
+#define force_prefetch(PTR) asm("prefetcht0 %0" : /**/ : "m"(PTR) : /**/ );
+#else
+// most compilers implement __builtin_prefetch
+#define force_prefetch(PTR) __builtin_prefetch(PTR)
+#endif
+
+
 int main(int argc, const char *argv[]) {
         if (argc!=3) {
 		fprintf(stderr,"Error, wrong number of arguments\n");
@@ -40,7 +49,7 @@ int main(int argc, const char *argv[]) {
 	  for (uint32_t l=0; l<n_comp; l++) {
 	    for (uint32_t b=0; b<nblock; b++) {
 		  uint32_t next = idxs[vals[b]]; // find the next location using the current one
-		  __builtin_prefetch(idxs+next);            
+		  force_prefetch(idxs+next);
 		  vals[b] = next;
 	    }
 
