@@ -36,8 +36,8 @@ int main(int argc, const char *argv[]) {
 	uint32_t *buf = new uint32_t[n_els];
 
 	auto t1 = std::chrono::high_resolution_clock::now();
-	constexpr uint32_t nblock = PREFETCH_DEPTH; // MUST BE a divisor of 128
-        // process one block at a time, with prefetch in between
+	constexpr uint32_t nblock = VECT; // MUST BE a divisor of 128
+        // process one block at a time to enable in-loop vectorization
 #ifdef OMPGPU
 #pragma omp target teams distribute parallel for simd map(from:buf[0:n_els]) map(to:idxs[0:0x40000000])
 #else
@@ -49,7 +49,9 @@ int main(int argc, const char *argv[]) {
 	  for (uint32_t l=0; l<n_comp; l++) {
 	    for (uint32_t b=0; b<nblock; b++) {
 		  uint32_t next = idxs[vals[b]]; // find the next location using the current one
+#ifdef DO_PREFETCH
 		  force_prefetch(idxs+next);
+#endif
 		  vals[b] = next;
 	    }
 

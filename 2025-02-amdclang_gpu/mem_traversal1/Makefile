@@ -1,8 +1,8 @@
 all: all_gcc
 
-all_gcc: mt1_gcc mt1_prefetch16_gcc
+all_gcc: mt1_gcc mt1_vect_gcc mt1_vectx4_gcc mt1_prefetch_gcc
 
-all_clang: mt1_clang mt1_prefetch16_clang
+all_clang: mt1_clang mt1_vect_clang mt1_vectx4_clang mt1_prefetch_clang
 
 all_amd_gpu: mt1_amd_gpu mt1_prefetch16_amd_gpu mt1_prefetch1_amd_gpu
 
@@ -32,38 +32,48 @@ mt1_nv_cpu: mt1.cpp
 	$(NV_CXX_CPU) -o $@ $<
 
 
-mt1_prefetch16_gcc: mt1_prefetch.cpp
-	# Ideal prefetch depth may be CPU specific, but 16 seems to work fine on most setups
-	$(GCC_CXX) -DPREFETCH_DEPTH=16 -o $@ $<
+mt1_vect_gcc: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(GCC_CXX) -DVECT=16 -o $@ $<
 
-mt1_prefetch16_clang: mt1_prefetch.cpp
-	# Ideal prefetch depth may be CPU specific, but 16 seems to work fine on most setups
-	$(CLANG_CXX) -DPREFETCH_DEPTH=16 -o $@ $<
+mt1_vectx4_gcc: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(GCC_CXX) -DVECT=64 -o $@ $<
 
-mt1_prefetch16_amd_gpu: mt1_prefetch.cpp
+mt1_vect_clang: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(CLANG_CXX) -DVECT=16 -o $@ $<
+
+mt1_vectx4_clang: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(CLANG_CXX) -DVECT=64 -o $@ $<
+
+
+
+mt1_prefetch_gcc: mt1_vect.cpp
+	$(GCC_CXX) -DVECT=16 -DDO_PREFETCH -o $@ $<
+
+mt1_prefetchx4_gcc: mt1_vect.cpp
+	$(GCC_CXX) -DVECT=64 -DDO_PREFETCH -o $@ $<
+
+mt1_prefetch_clang: mt1_vect.cpp
+	$(CLANG_CXX) -DVECT=16 -DDO_PREFETCH -o $@ $<
+
+mt1_prefetch_amd_gpu: mt1_prefetch.cpp
 	# There is no prefetch on GPUs, just keep the same as for the CPUs
 	$(AMD_CXX) -DPREFETCH_DEPTH=16 -o $@ $<
 
-mt1_prefetch16_nv_gpu: mt1_prefetch.cpp
+mt1_prefetch_nv_gpu: mt1_prefetch.cpp
 	# There is no prefetch on GPUs, just keep the same as for the CPUs
 	$(NV_CXX) -DPREFETCH_DEPTH=16 -o $@ $<
 
-mt1_prefetch16_nv_cpu: mt1_prefetch.cpp
-	# Ideal prefetch depth may be CPU specific, but 16 seems to work fine on most setups
+mt1_prefetch_nv_cpu: mt1_prefetch.cpp
 	$(NV_CXX_CPU) -DPREFETCH_DEPTH=16 -DPREFETCH_ASM_x86 -o $@ $<
-
-
-mt1_prefetch1_amd_gpu: mt1_prefetch.cpp
-	# There is no prefetch on GPUs, effectively disable it
-	$(AMD_CXX) -DPREFETCH_DEPTH=1 -o $@ $<
-
-mt1_prefetch1_nv_gpu: mt1_prefetch.cpp
-	# There is no prefetch on GPUs, effectivey disable
-	$(NV_CXX) -DPREFETCH_DEPTH=1 -o $@ $<
 
 
 clean:
 	rm -f mt1_gcc mt1_clang mt1_amd_gpu mt1_nv_gpu mt1_nv_cpu 
-	rm -f mt1_prefetch16_gcc mt1_prefetch16_clang mt1_prefetch16_amd_gpu mt1_prefetch16_nv_gpu mt1_prefetch16_nv_cpu 
-	rm -f mt1_prefetch1_amd_gpu mt1_prefetch1_nv_gpu
+	rm -f mt1_vect_gcc mt1_vect_clang mt1_vect_amd_gpu mt1_vect_nv_gpu mt1_vect_nv_cpu 
+	rm -f mt1_vectx4_gcc mt1_vectx4_clang mt1_vectx4_nv_cpu 
+	rm -f mt1_prefetch_gcc mt1_prefetch_clang mt1_prefetch_amd_gpu mt1_prefetch_nv_gpu mt1_prefetch_nv_cpu 
 
