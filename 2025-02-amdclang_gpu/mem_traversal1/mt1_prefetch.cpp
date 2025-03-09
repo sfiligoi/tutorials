@@ -27,18 +27,25 @@ int main(int argc, const char *argv[]) {
 	uint32_t *buf = new uint32_t[n_els];
 
 	auto t1 = std::chrono::high_resolution_clock::now();
+	constexpr uint32_t nblock = PREFETCH_DEPTH; // MUST BE a divisor of 128
+        // process one block at a time, with prefetch in between
 #ifdef OMPGPU
 #pragma omp target teams distribute parallel for simd map(from:buf[0:n_els]) map(to:idxs[0:1000000000])
 #else
 #pragma omp parallel for simd
 #endif
-	for (uint32_t i=0; i<n_els; i++) {
-	  uint32_t val = i;
+	for (uint32_t i=0; i<n_els; i+=nblock) {
+	  uint32_t vals[nblock];
+	  for (uint32_t b=0; b<nblock; b++) vals[b] = i+b;
 	  for (uint32_t l=0; l<n_comp; l++) {
-		  val = idxs[val]; // find the next location using the current one
+	    for (uint32_t b=0; b<nblock; b++) {
+		  uint32_t next = idxs[vals[b]]; // find the next location using the current one
+		  __builtin_prefetch(idxs+next);            
+		  vals[b] = next;
+	    }
 
 	  }
-	  buf[i] = val;
+	  for (uint32_t b=0; b<nblock; b++) buf[i+b] = vals[b];
 	}
 	auto t2 = std::chrono::high_resolution_clock::now();
 

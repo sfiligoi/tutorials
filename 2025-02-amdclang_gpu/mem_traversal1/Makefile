@@ -1,14 +1,14 @@
 all: all_gcc
 
-all_gcc: mt1_gcc 
+all_gcc: mt1_gcc mt1_prefetch16_gcc
 
-all_clang: mt1_clang 
+all_clang: mt1_clang mt1_prefetch16_clang
 
-all_amd_gpu: mt1_amd_gpu 
+all_amd_gpu: mt1_amd_gpu mt1_prefetch16_amd_gpu
 
-all_nv_gpu: mt1_nv_gpu 
+all_nv_gpu: mt1_nv_gpu mt1_prefetch16_nv_gpu
 
-all_nv_cpu: mt1_nv_cpu 
+all_nv_cpu: mt1_nv_cpu mt1_prefetch16_nv_cpu
 
 GCC_CXX   := g++ --std=c++17 -fopenmp -march=native -mtune=native -O3
 CLANG_CXX := clang++ --std=c++17 -fopenmp -march=native -mtune=native -O3
@@ -25,14 +25,35 @@ mt1_clang: mt1.cpp
 mt1_amd_gpu: mt1.cpp
 	$(AMD_CXX) -o $@ $<
 
-mt1__nv_gpu: mt1.cpp
+mt1_nv_gpu: mt1.cpp
 	$(NV_CXX) -o $@ $<
 
 mt1_nv_cpu: mt1.cpp
 	$(NV_CXX_CPU) -o $@ $<
 
 
+mt1_prefetch16_gcc: mt1_prefetch.cpp
+	# Ideal prefetch depth may be CPU specific, but 16 seems to work fine on most setups
+	$(GCC_CXX) -DPREFETCH_DEPTH=16 -o $@ $<
+
+mt1_prefetch16_clang: mt1_prefetch.cpp
+	# Ideal prefetch depth may be CPU specific, but 16 seems to work fine on most setups
+	$(CLANG_CXX) -DPREFETCH_DEPTH=16 -o $@ $<
+
+mt1_prefetch16_amd_gpu: mt1_prefetch.cpp
+	# There is no prefetch on GPUs, just keep the same as for the CPUs
+	$(AMD_CXX) -DPREFETCH_DEPTH=16 -o $@ $<
+
+mt1_prefetch16_nv_gpu: mt1_prefetch.cpp
+	# There is no prefetch on GPUs, just keep the same as for the CPUs
+	$(NV_CXX) -DPREFETCH_DEPTH=16 -o $@ $<
+
+mt1_prefetch16_nv_cpu: mt1_prefetch.cpp
+	# Ideal prefetch depth may be CPU specific, but 16 seems to work fine on most setups
+	$(NV_CXX_CPU) -DPREFETCH_DEPTH=16 -o $@ $<
+
 
 clean:
 	rm -f mt1_gcc mt1_clang mt1_amd_gpu mt1_nv_gpu mt1_nv_cpu 
+	rm -f mt1_prefetch16_gcc mt1_prefetch16_clang mt1_prefetch16_amd_gpu mt1_prefetch16_nv_gpu mt1_prefetch16_nv_cpu 
 
