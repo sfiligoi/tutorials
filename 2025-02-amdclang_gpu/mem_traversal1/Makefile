@@ -1,14 +1,14 @@
 all: all_gcc
 
-all_gcc: mt1_gcc mt1_vect_gcc mt1_vectx4_gcc mt1_prefetch_gcc
+all_gcc: mt1_gcc mt1_cached_gcc mt1_vect_gcc mt1_vectx4_gcc mt1_vect_cached_gcc mt1_vectx4_cached_gcc mt1_prefetch_gcc
 
-all_clang: mt1_clang mt1_vect_clang mt1_vectx4_clang mt1_prefetch_clang
+all_clang: mt1_clang mt1_cached_clang mt1_vect_clang mt1_vectx4_clang mt1_vect_cached_clang mt1_vectx4_cached_clang mt1_prefetch_clang
 
-all_amd_gpu: mt1_amd_gpu mt1_prefetch16_amd_gpu mt1_prefetch1_amd_gpu
+all_amd_gpu: mt1_amd_gpu mt1_cached_amd_gpu mt1_vect_amd_gpu mt1_vect_cached_amd_gpu mt1_prefetch_amd_gpu
 
-all_nv_gpu: mt1_nv_gpu mt1_prefetch16_nv_gpu mt1_prefetch1_nv_gpu
+all_nv_gpu: mt1_nv_gpu mt1_cached_nv_gpu mt1_vect_nv_gpu mt1_vect_cached_nv_gpu mt1_prefetch_nv_gpu
 
-all_nv_cpu: mt1_nv_cpu mt1_prefetch16_nv_cpu
+all_nv_cpu: mt1_nv_cpu mt1_cached_nv_cpu mt1_vect_nv_cpu mt1_vectx4_nv_cpu mt1_vect_cached_nv_cpu mt1_vectx4_cached_nv_cpu mt1_prefetch_nv_cpu
 
 GCC_CXX   := g++ --std=c++17 -fopenmp -march=native -mtune=native -O3
 CLANG_CXX := clang++ --std=c++17 -fopenmp -march=native -mtune=native -O3
@@ -32,6 +32,22 @@ mt1_nv_cpu: mt1.cpp
 	$(NV_CXX_CPU) -o $@ $<
 
 
+mt1_cached_gcc: mt1.cpp
+	$(GCC_CXX) -DSMALL_IDX -o $@ $<
+
+mt1_cached_clang: mt1.cpp
+	$(CLANG_CXX) -DSMALL_IDX -o $@ $<
+
+mt1_cached_amd_gpu: mt1.cpp
+	$(AMD_CXX) -DSMALL_IDX -o $@ $<
+
+mt1_cached_nv_gpu: mt1.cpp
+	$(NV_CXX) -DSMALL_IDX -o $@ $<
+
+mt1_cached_nv_cpu: mt1.cpp
+	$(NV_CXX_CPU) -DSMALL_IDX -o $@ $<
+
+
 mt1_vect_gcc: mt1_vect.cpp
 	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
 	$(GCC_CXX) -DVECT=16 -o $@ $<
@@ -48,6 +64,55 @@ mt1_vectx4_clang: mt1_vect.cpp
 	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
 	$(CLANG_CXX) -DVECT=64 -o $@ $<
 
+mt1_vect_nv_cpu: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(NV_CXX_CPU) -DVECT=16 -o $@ $<
+
+mt1_vectx4_nv_cpu: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(NV_CXX_CPU) -DVECT=64 -o $@ $<
+
+mt1_vect_amd_gpu: mt1_vect.cpp
+	# set vector width to the warp
+	$(AMD_CXX) -DVECT=64 -o $@ $<
+
+mt1_vect_nv_gpu: mt1_vect.cpp
+	# set vector width to the warp
+	$(NV_CXX) -DVECT=32 -o $@ $<
+
+
+mt1_vect_cached_gcc: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(GCC_CXX) -DVECT=16 -DSMALL_IDX -o $@ $<
+
+mt1_vectx4_cached_gcc: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(GCC_CXX) -DVECT=64 -DSMALL_IDX -o $@ $<
+
+mt1_vect_cached_clang: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(CLANG_CXX) -DVECT=16 -DSMALL_IDX -o $@ $<
+
+mt1_vectx4_cached_clang: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(CLANG_CXX) -DVECT=64 -DSMALL_IDX -o $@ $<
+
+mt1_vect_cached_nv_cpu: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(NV_CXX_CPU) -DVECT=16 -DSMALL_IDX -o $@ $<
+
+mt1_vectx4_cached_nv_cpu: mt1_vect.cpp
+	# ideal vector width may be CPU specific (e.g. AVX512 vs SSE)
+	$(NV_CXX_CPU) -DVECT=64 -DSMALL_IDX -o $@ $<
+
+mt1_vect_cached_amd_gpu: mt1_vect.cpp
+	# set vector width to the warp
+	$(AMD_CXX) -DVECT=64 -DSMALL_IDX -o $@ $<
+
+mt1_vect_cached_nv_gpu: mt1_vect.cpp
+	# set vector width to the warp
+	$(NV_CXX) -DVECT=32 -DSMALL_IDX -o $@ $<
+
 
 
 mt1_prefetch_gcc: mt1_vect.cpp
@@ -59,21 +124,24 @@ mt1_prefetchx4_gcc: mt1_vect.cpp
 mt1_prefetch_clang: mt1_vect.cpp
 	$(CLANG_CXX) -DVECT=16 -DDO_PREFETCH -o $@ $<
 
-mt1_prefetch_amd_gpu: mt1_prefetch.cpp
-	# There is no prefetch on GPUs, just keep the same as for the CPUs
-	$(AMD_CXX) -DPREFETCH_DEPTH=16 -o $@ $<
+mt1_prefetch_amd_gpu: mt1_vect.cpp
+	# There is no prefetch on GPUs, mostly checking it compiles
+	$(AMD_CXX) -DVECT=64 -DDO_PREFETCH -o $@ $<
 
-mt1_prefetch_nv_gpu: mt1_prefetch.cpp
-	# There is no prefetch on GPUs, just keep the same as for the CPUs
-	$(NV_CXX) -DPREFETCH_DEPTH=16 -o $@ $<
+mt1_prefetch_nv_gpu: mt1_vect.cpp
+	# There is no prefetch on GPUs, mostly checking it compiles
+	$(NV_CXX) -DVECT=32 -DDO_PREFETCH -o $@ $<
 
-mt1_prefetch_nv_cpu: mt1_prefetch.cpp
-	$(NV_CXX_CPU) -DPREFETCH_DEPTH=16 -DPREFETCH_ASM_x86 -o $@ $<
+mt1_prefetch_nv_cpu: mt1_vect.cpp
+	$(NV_CXX_CPU) -DVECT=16 -DDO_PREFETCH -DPREFETCH_ASM_x86 -o $@ $<
 
 
 clean:
 	rm -f mt1_gcc mt1_clang mt1_amd_gpu mt1_nv_gpu mt1_nv_cpu 
 	rm -f mt1_vect_gcc mt1_vect_clang mt1_vect_amd_gpu mt1_vect_nv_gpu mt1_vect_nv_cpu 
 	rm -f mt1_vectx4_gcc mt1_vectx4_clang mt1_vectx4_nv_cpu 
+	rm -f mt1_cached_gcc mt1_cached_clang mt1_cached_amd_gpu mt1_cached_nv_gpu mt1_cached_nv_cpu 
+	rm -f mt1_vect_cached_gcc mt1_vect_cached_clang mt1_vect_cached_amd_gpu mt1_vect_cached_nv_gpu mt1_vect_cached_nv_cpu 
+	rm -f mt1_vectx4_cached_gcc mt1_vectx4_cached_clang mt1_vectx4_cached_nv_cpu 
 	rm -f mt1_prefetch_gcc mt1_prefetch_clang mt1_prefetch_amd_gpu mt1_prefetch_nv_gpu mt1_prefetch_nv_cpu 
 

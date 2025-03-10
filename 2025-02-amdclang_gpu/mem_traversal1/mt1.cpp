@@ -11,32 +11,40 @@ int main(int argc, const char *argv[]) {
 		fprintf(stderr,"Usage:\n\t%s <size_multiplier> <seed>\n",argv[0]);
 		return 1;
 	}
-	const uint32_t n_els = std::stol(argv[1])*240*1024+128; // 128-aligned, but not a multiple of 1k
+	const uint32_t s_mult = std::stol(argv[1]);
+	const uint32_t n_els = s_mult*240*1024+128; // 128-aligned, but not a multiple of 1k
 
 	auto t0 = std::chrono::high_resolution_clock::now();
+#ifdef SMALL_IDX
+	// indexes to the next element, fixed 512k buffer, fits in cache
+	constexpr uint32_t idxs_size = 0x20000;
+#else
 	// indexes to the next element, fixed 4G buffer
-	uint32_t *idxs = new uint32_t[0x40000000];
+	constexpr uint32_t idxs_size = 0x40000000;
+#endif
+	uint32_t *idxs = new uint32_t[idxs_size];
 #pragma omp parallel for
 	for (uint32_t i8=0; i8<8; i8++) { // do several parallel streams, as it is not trivial
+	  constexpr uint32_t idxs_mask = idxs_size-1;
+	  constexpr uint32_t idxs_s8 = idxs_size/8;
 	  std::mt19937 myRandomGenerator(std::stol(argv[2])+i8);
-          for (uint32_t i=0; i<0x8000000; i++) idxs[(i8*0x8000000)+i] = myRandomGenerator() & 0x3fffffff;
+          for (uint32_t i=0; i<idxs_s8; i++) idxs[(i8*idxs_s8)+i] = myRandomGenerator() & idxs_mask;
 	}
-#pragma omp target enter data map(to:idxs[0:0x40000000])
+#pragma omp target enter data map(to:idxs[0:idxs_size])
 
-	constexpr uint32_t n_comp = 4*1024-128; // 128-aligned, but not a multiple of 1k
+	const uint32_t n_comp = s_mult*s_mult*4*1024-128; // 128-aligned, but not a multiple of 1k
 	uint32_t *buf = new uint32_t[n_els];
 
 	auto t1 = std::chrono::high_resolution_clock::now();
 #ifdef OMPGPU
-#pragma omp target teams distribute parallel for simd map(from:buf[0:n_els]) map(to:idxs[0:0x40000000])
+#pragma omp target teams distribute parallel for simd map(from:buf[0:n_els]) map(to:idxs[0:idxs_size])
 #else
 #pragma omp parallel for simd
 #endif
 	for (uint32_t i=0; i<n_els; i++) {
-	  uint32_t val = i;
+	  uint32_t val = i%(idxs_size-3);
 	  for (uint32_t l=0; l<n_comp; l++) {
 		  val = idxs[val]; // find the next location using the current one
-
 	  }
 	  buf[i] = val;
 	}
@@ -52,7 +60,7 @@ int main(int argc, const char *argv[]) {
 	printf("compute %.3f s init %.3f sort %.3f s\n", time_span1.count(), time_span0.count(), time_span2.count());
 
 	delete[] buf;
-#pragma omp target exit data map(release:idxs[0:0x40000000])
+#pragma omp target exit data map(release:idxs[0:idxs_size])
 	delete[] idxs;
 	return 0;
 }
