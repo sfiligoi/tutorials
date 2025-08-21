@@ -1,0 +1,41 @@
+Using cuPy to speed up compute on AMD MI300A
+============================================
+
+Setup
+=====
+The following instructions work on SDSC Cosmos system.
+Adapt as needed, if running on a different setup
+
+Assuming you are inside a conda environment,
+install cupy and some support libraries:
+----------------------------------------
+conda create -n cupy-tutorial -c conda-forge python=3.12 gxx scikit-bio wget make
+conda activate cupy-tutorial
+# AMD-GPU eabled cupy no avaialble in conda, build using pip
+export ROCM_HOME=/opt/rocm
+export CUPY_INSTALL_USE_HIP=1
+pip install cupy
+
+Fetch large DistanceMatrix file, used in examples:
+--------------------------------------------------
+wget http://uaf-10.t2.ucsd.edu/~sfiligoi/unifrac_inputs/emp/uw_emp.h5
+
+Exercises
+=========
+
+1) Compare numpy vs cupy performance
+------------------------------------
+A numpy array can be converted to a cupy array,
+and then used with either library.
+
+Look inside
+lingalg_qr.py
+
+and then try to execute it with
+# Force the use if the 2nd APU on the node
+export ROCR_VISIBLE_DEVICES=1
+taskset -c 24-47,120-143 python lingalg_qr.py
+
+
+
+
