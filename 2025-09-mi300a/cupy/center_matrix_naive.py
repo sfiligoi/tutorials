@@ -83,6 +83,14 @@ r1 = center_distance_matrix(cmat)
 t2 = time.time()
 print("Large on GPU: ", t2-t1)
 
-
+#
+# Modern scikit-bio contains a CPU-optimized version of center_distance_matrix
+# You can check how it performs as an exercise
+#
+#from skbio.stats.ordination._utils import center_distance_matrix as center_distance_matrix_skbio
+#t1 = time.time()
+#r2 = center_distance_matrix_skbio(mat)
+#t2 = time.time()
+#print("Large on CPU using skbio: ", t2-t1)
 
 
