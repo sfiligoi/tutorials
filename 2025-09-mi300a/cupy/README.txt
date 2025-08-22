@@ -9,7 +9,7 @@ Adapt as needed, if running on a different setup
 Assuming you are inside a conda environment,
 install cupy and some support libraries:
 ----------------------------------------
-conda create -n cupy-tutorial -c conda-forge python=3.12 gxx scikit-bio wget make
+conda create -n cupy-tutorial -c conda-forge python=3.12 gxx scikit-bio numpy-allocator wget make
 conda activate cupy-tutorial
 # AMD-GPU eabled cupy no avaialble in conda, build using pip
 export ROCM_HOME=/opt/rocm
@@ -65,5 +65,20 @@ export ROCR_VISIBLE_DEVICES=1
 taskset -c 24-47,120-143 python scipy_math.py
 
 
+4) Enable unified memory
+------------------------
+So far, cupy was moving memory around behind the scenes.
+Let's enable the true shared memory setup.
 
+Look inside
+center_matrix_naive_apu.py
+(and compare with center_matrix_naive.py)
+
+and then try to execute it with
+# Force the use if the 2nd APU on the node
+export ROCR_VISIBLE_DEVICES=1
+# shared memory is disabled by default, must set the two env variables
+CUPY_ENABLE_UMP=1 HSA_XNACK=1 taskset -c 24-47,120-143 python center_matrix_naive_apu.py
+
+As further exercise, try to modify the other python files along the same lines, too.
 
