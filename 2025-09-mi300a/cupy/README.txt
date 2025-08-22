@@ -26,6 +26,19 @@ Exercises
 1) Compare numpy vs cupy performance
 ------------------------------------
 A numpy array can be converted to a cupy array,
+and then you operate on it as before.
+
+Look inside
+center_matrix_naive.py
+
+and then try to execute it with
+# Force the use if the 2nd APU on the node
+export ROCR_VISIBLE_DEVICES=1
+taskset -c 24-47,120-143 python center_matrix_naive.py
+
+2) Compare numpy vs cupy libraries
+------------------------------------
+A numpy array can be converted to a cupy array,
 and then used with either library.
 
 Look inside
@@ -37,8 +50,8 @@ export ROCR_VISIBLE_DEVICES=1
 taskset -c 24-47,120-143 python lingalg_qr.py
 
 
-2) Compare scipy vs cupyx performance
--------------------------------------
+3) Compare scipy vs cupyx libraries
+-----------------------------------
 A numpy array can be converted to a cupy array,
 and then used with scipy.
 GPU compute can be forced by using the cupyx.scipy library.

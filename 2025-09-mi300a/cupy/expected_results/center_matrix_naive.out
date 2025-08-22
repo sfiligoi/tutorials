@@ -1,0 +1,12 @@
+(cupy-tutorial) x8000c2s5b0n0 > taskset -c 24-47,120-143 python center_matrix_naive.py
+Small on CPU:  0.03569507598876953
+Small on GPU:  0.0058324337005615234
+Medium matrix shape:  (8382, 8382)
+Medium on CPU:  0.350614070892334
+Medium on GPU:  0.03656578063964844
+Large matrix shape:  (25145, 25145)
+Large on CPU:  3.0776922702789307
+Large on GPU:  2.479780912399292
+... Retrying
+Large on CPU:  3.0537822246551514
+Large on GPU:  0.005101680755615234
