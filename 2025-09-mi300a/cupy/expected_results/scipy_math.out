@@ -1,0 +1,41 @@
+(cupy-tutorial) x8000c2s5b1n0 > taskset -c 24-47,120-143 python scipy_math.py
+=====  Small matrix shape:  (2794, 2794)
+---- Try  1
+Small base on CPU   :  0.19151520729064941
+Small compose on CPU:  0.24160361289978027
+Small base on GPU   :  1.5302624702453613
+Small compose on GPU:  0.596458911895752
+Small base on GPU using scipy   :  0.00939488410949707
+Small compose on GPU using scipy:  0.00940561294555664
+---- Try  2
+Small base on CPU   :  0.1907815933227539
+Small compose on CPU:  0.23810458183288574
+Small base on GPU   :  0.009900808334350586
+Small compose on GPU:  0.009325265884399414
+Small base on GPU using scipy   :  0.00914621353149414
+Small compose on GPU using scipy:  0.009476900100708008
+[INFO] Cannot pass numpy array to cupy
+====  Medium matrix shape:  (8382, 8382)
+---- Try  1
+Medium compose on CPU:  2.2604973316192627
+Medium compose on GPU:  0.12029337882995605
+Medium compose on GPU using scipy:  0.11943554878234863
+---- Try  2
+Medium compose on CPU:  2.201345205307007
+Medium compose on GPU:  0.11931490898132324
+Medium compose on GPU using scipy:  0.12128615379333496
+====  Large matrix shape:  (25145, 25145)
+---- Try  1
+Large base on CPU   :  15.358322620391846
+Large compose on CPU:  19.887831449508667
+Large base on GPU   :  1.7857863903045654
+Large compose on GPU:  1.8026211261749268
+Large base on GPU using scipy   :  1.0526618957519531
+Large compose on GPU using scipy:  1.0672361850738525
+---- Try  2
+Large base on CPU   :  15.333553791046143
+Large compose on CPU:  19.891259908676147
+Large base on GPU   :  1.056447982788086
+Large compose on GPU:  1.0619988441467285
+Large base on GPU using scipy   :  1.040388822555542
+Large compose on GPU using scipy:  1.0551750659942627
