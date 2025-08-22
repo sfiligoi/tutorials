@@ -65,7 +65,22 @@ export ROCR_VISIBLE_DEVICES=1
 taskset -c 24-47,120-143 python scipy_math.py
 
 
-4) Enable unified memory
+4) Mixing CPU and GPU code
+--------------------------
+A numpy array can be converted to a cupy array,
+but those cupy arrays are not accepted in many scipy functions.
+In those cases, we must explicitly cast the buffers back to numpy.
+
+Look inside
+scipy_mixed.py
+
+and then try to execute it with
+# Force the use if the 2nd APU on the node
+export ROCR_VISIBLE_DEVICES=1
+taskset -c 24-47,120-143 python scipy_mixed.py
+
+
+5) Enable unified memory
 ------------------------
 So far, cupy was moving memory around behind the scenes.
 Let's enable the true shared memory setup.

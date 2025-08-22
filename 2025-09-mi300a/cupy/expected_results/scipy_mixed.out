@@ -1,0 +1,11 @@
+(cupy-tutorial) x8000c2s5b1n0 > taskset -c 24-47,120-143 python scipy_mixed.py
+---- Try  1
+Prepare on CPU :  5.0041115283966064
+Spearman on CPU:  3.2398414611816406
+Prepare on GPU :  1.6663594245910645
+Spearman on CPU:  2.4212992191314697
+---- Try  2
+Prepare on CPU :  4.534910202026367
+Spearman on CPU:  2.403193712234497
+Prepare on GPU :  0.10163378715515137
+Spearman on CPU:  2.428053617477417
