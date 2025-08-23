@@ -11,7 +11,7 @@ install cupy and some support libraries:
 ----------------------------------------
 conda create -n cupy-tutorial -c conda-forge python=3.12 gxx scikit-bio numpy-allocator wget make
 conda activate cupy-tutorial
-# AMD-GPU eabled cupy no avaialble in conda, build using pip
+# AMD-GPU enabled cupy not avaialble in conda, build using pip
 export ROCM_HOME=/opt/rocm
 export CUPY_INSTALL_USE_HIP=1
 pip install cupy
