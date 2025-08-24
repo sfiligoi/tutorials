@@ -32,7 +32,7 @@ Look inside
 center_matrix_naive.py
 
 and then try to execute it with
-# Force the use if the 2nd APU on the node
+# Force the use of the 2nd APU on the node
 export ROCR_VISIBLE_DEVICES=1
 taskset -c 24-47,120-143 python center_matrix_naive.py
 
@@ -45,7 +45,7 @@ Look inside
 lingalg_qr.py
 
 and then try to execute it with
-# Force the use if the 2nd APU on the node
+# Force the use of the 2nd APU on the node
 export ROCR_VISIBLE_DEVICES=1
 taskset -c 24-47,120-143 python lingalg_qr.py
 
@@ -60,7 +60,7 @@ Look inside
 scipy_math.py
 
 and then try to execute it with
-# Force the use if the 2nd APU on the node
+# Force the use of the 2nd APU on the node
 export ROCR_VISIBLE_DEVICES=1
 taskset -c 24-47,120-143 python scipy_math.py
 
@@ -75,7 +75,7 @@ Look inside
 scipy_mixed.py
 
 and then try to execute it with
-# Force the use if the 2nd APU on the node
+# Force the use of the 2nd APU on the node
 export ROCR_VISIBLE_DEVICES=1
 taskset -c 24-47,120-143 python scipy_mixed.py
 
@@ -90,7 +90,7 @@ center_matrix_naive_apu.py
 (and compare with center_matrix_naive.py)
 
 and then try to execute it with
-# Force the use if the 2nd APU on the node
+# Force the use of the 2nd APU on the node
 export ROCR_VISIBLE_DEVICES=1
 # shared memory is disabled by default, must set the two env variables
 CUPY_ENABLE_UMP=1 HSA_XNACK=1 taskset -c 24-47,120-143 python center_matrix_naive_apu.py
