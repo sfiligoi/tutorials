@@ -1,0 +1,19 @@
+(jax-tutorial) x8000c2s5b0n0 > taskset -c 24-47,120-143 python center_matrix_naive.py
+---- Try  1
+Small on CPU:  0.036332130432128906
+Small on GPU:  1.3399755954742432
+Medium matrix shape:  (8382, 8382)
+Medium on CPU:  0.32793116569519043
+Medium on GPU:  1.1519091129302979
+Large matrix shape:  (25145, 25145)
+Large on CPU:  3.275468587875366
+Large on GPU:  1.1507694721221924
+---- Try  2
+Small on CPU:  0.035262346267700195
+Small on GPU:  0.0016260147094726562
+Medium matrix shape:  (8382, 8382)
+Medium on CPU:  0.37108588218688965
+Medium on GPU:  0.0024073123931884766
+Large matrix shape:  (25145, 25145)
+Large on CPU:  3.327915906906128
+Large on GPU:  0.019315481185913086

@@ -1,0 +1,26 @@
+(jax-tutorial) x8000c2s5b0n0 > taskset -c 24-47,120-143 python center_matrix_jit.py
+JIT compilation:  0.0003323554992675781
+---- Try  1
+Small on CPU naive:  0.03552532196044922
+Small on CPU tuned:  0.0070645809173583984
+Small on GPU JIT  :  0.4138319492340088
+Medium matrix shape:  (8382, 8382)
+Medium on CPU naive:  0.31638598442077637
+Medium on CPU tuned:  0.011092185974121094
+Medium on GPU JIT  :  0.2760329246520996
+Large matrix shape:  (25145, 25145)
+Large on CPU naive:  3.147237539291382
+Large on CPU tuned:  0.09518194198608398
+Large on GPU JIT  :  0.24876785278320312
+---- Try  2
+Small on CPU naive:  0.031699419021606445
+Small on CPU tuned:  0.008263587951660156
+Small on GPU JIT  :  0.0006177425384521484
+Medium matrix shape:  (8382, 8382)
+Medium on CPU naive:  0.3554835319519043
+Medium on CPU tuned:  0.012917041778564453
+Medium on GPU JIT  :  0.0027153491973876953
+Large matrix shape:  (25145, 25145)
+Large on CPU naive:  3.1566247940063477
+Large on CPU tuned:  0.08973264694213867
+Large on GPU JIT  :  0.007985830307006836
