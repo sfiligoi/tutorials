@@ -1,0 +1,11 @@
+(skbio-tutorial) x8000c1s1b0n0 > SKBB_USE_GPU=N taskset -c 24-47,120-143 python skbio_permanova.py
+Small matrix shape:  (2794, 2794)
+Small permutations=1k  :  0.024426937103271484
+Small permutations=100k:  1.2275347709655762
+Medium matrix shape:  (8382, 8382)
+Medium permutations=1k  :  0.13225007057189941
+Medium permutations=100k:  9.830148935317993
+Large matrix shape:  (25145, 25145)
+Large permutations=1k  :  1.2009518146514893
+Large permutations=100k:  96.57273817062378
+

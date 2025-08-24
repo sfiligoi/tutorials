@@ -1,0 +1,10 @@
+(skbio-tutorial) x8000c1s1b0n0 > taskset -c 24-47,120-143 python skbio_permanova.py
+Small matrix shape:  (2794, 2794)
+Small permutations=1k  :  0.025978565216064453
+Small permutations=100k:  0.7391202449798584
+Medium matrix shape:  (8382, 8382)
+Medium permutations=1k  :  0.14919590950012207
+Medium permutations=100k:  5.646555423736572
+Large matrix shape:  (25145, 25145)
+Large permutations=1k  :  1.744107961654663
+Large permutations=100k:  64.09471035003662
