@@ -1,0 +1,19 @@
+(jax-tutorial) x8000c2s5b0n0 > taskset -c 24-47,120-143 python linalg_jax.py
+---- Try  1
+Small on CPU:  0.8203892707824707
+Small on GPU:  0.9765603542327881
+Medium matrix shape:  (8382, 8382)
+Medium on CPU:  7.220642566680908
+Medium on GPU:  1.0779426097869873
+Large matrix shape:  (25145, 25145)
+Large on CPU:  112.82020545005798
+Large on GPU:  6.127923488616943
+---- Try  2
+Small on CPU:  0.7423830032348633
+Small on GPU:  0.16123080253601074
+Medium matrix shape:  (8382, 8382)
+Medium on CPU:  7.585455417633057
+Medium on GPU:  0.6675901412963867
+Large matrix shape:  (25145, 25145)
+Large on CPU:  113.72601866722107
+Large on GPU:  5.9626476764678955
