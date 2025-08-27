@@ -33,3 +33,7 @@ and then try to execute it with
 # Force the use of the 2nd APU on the node
 taskset -c 24-47,120-143 python center_matrix_jit.py
 
+Another variant availabe in
+center_matrix_jit_implicit.py
+
+

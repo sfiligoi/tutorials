@@ -1,0 +1,25 @@
+(jax-cpu-tutorial) x8000c2s5b0n0 > taskset -c 24-47,120-143 python center_matrix_jit_implicit.py
+---- Try  1
+Small on CPU numpy:  0.10274410247802734
+Small on CPU jax  ::  0.006577253341674805
+Small on CPU tuned:  0.005303144454956055
+Medium matrix shape:  (8382, 8382)
+Medium on CPU numpy:  0.14133024215698242
+Medium on CPU jax  :  0.03292679786682129
+Medium on CPU tuned:  0.010126113891601562
+Large matrix shape:  (25145, 25145)
+Large on CPU numpy:  0.74898362159729
+Large on CPU jax  :  0.21559762954711914
+Large on CPU tuned:  0.08177566528320312
+---- Try  2
+Small on CPU numpy:  0.01005697250366211
+Small on CPU jax  ::  0.012780189514160156
+Small on CPU tuned:  0.006965160369873047
+Medium matrix shape:  (8382, 8382)
+Medium on CPU numpy:  0.09899210929870605
+Medium on CPU jax  :  0.039589643478393555
+Medium on CPU tuned:  0.010350942611694336
+Large matrix shape:  (25145, 25145)
+Large on CPU numpy:  0.7002184391021729
+Large on CPU jax  :  0.2243669033050537
+Large on CPU tuned:  0.06731963157653809
