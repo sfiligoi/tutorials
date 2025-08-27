@@ -48,3 +48,29 @@ and then try to execute it with
 export ROCR_VISIBLE_DEVICES=1
 taskset -c 24-47,120-143 python center_matrix_jit.py
 
+3) JAX linalg functions
+-----------------------
+JAX provides several NumPy equivalent functions.
+
+This file provides an example
+linalg_jax.py
+
+Look inside it, then Try to execute it with
+# Force the use of the 2nd APU on the node
+export ROCR_VISIBLE_DEVICES=1
+taskset -c 24-47,120-143 python linalg_jax.py 
+
+4) Mixing NumPy and JAX
+-----------------------
+Not all library functions are JAX-aware.
+For those, you may need to do a conversion
+between the two format.
+
+Look inside
+linalg_mixed.py
+
+and then try to execute it with
+# Force the use of the 2nd APU on the node
+export ROCR_VISIBLE_DEVICES=1
+taskset -c 24-47,120-143 python linalg_mixed.py
+
