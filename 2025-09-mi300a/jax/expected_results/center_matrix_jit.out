@@ -1,26 +1,38 @@
 (jax-tutorial) x8000c2s5b0n0 > taskset -c 24-47,120-143 python center_matrix_jit.py
-JIT compilation:  0.0003323554992675781
+JIT compilation:  0.0003314018249511719
 ---- Try  1
-Small on CPU naive:  0.03552532196044922
-Small on CPU tuned:  0.0070645809173583984
-Small on GPU JIT  :  0.4138319492340088
+Small on CPU naive    :  0.03525972366333008
+Small on CPU tuned    :  0.0067539215087890625
+Small on GPU expl JIT :  0.4042775630950928
+Small on GPU impl JIT :  0.23344779014587402
+Small on GPU JIT+numpy:  0.003924369812011719
 Medium matrix shape:  (8382, 8382)
-Medium on CPU naive:  0.31638598442077637
-Medium on CPU tuned:  0.011092185974121094
-Medium on GPU JIT  :  0.2760329246520996
+Medium on CPU naive    :  0.3421308994293213
+Medium on CPU tuned    :  0.011314153671264648
+Medium on GPU expl JIT :  0.2677154541015625
+Medium on GPU impl JIT :  0.25899624824523926
+Medium on GPU JIT+numpy:  0.018241405487060547
 Large matrix shape:  (25145, 25145)
-Large on CPU naive:  3.147237539291382
-Large on CPU tuned:  0.09518194198608398
-Large on GPU JIT  :  0.24876785278320312
+Large on CPU naive    :  3.2012643814086914
+Large on CPU tuned    :  0.10011029243469238
+Large on GPU expl JIT :  0.2522463798522949
+Large on GPU impl JIT :  0.2390584945678711
+Large on GPU JIT+numpy:  0.06414151191711426
 ---- Try  2
-Small on CPU naive:  0.031699419021606445
-Small on CPU tuned:  0.008263587951660156
-Small on GPU JIT  :  0.0006177425384521484
+Small on CPU naive    :  0.030848264694213867
+Small on CPU tuned    :  0.008270263671875
+Small on GPU expl JIT :  0.0007140636444091797
+Small on GPU impl JIT :  0.00019407272338867188
+Small on GPU JIT+numpy:  0.0022134780883789062
 Medium matrix shape:  (8382, 8382)
-Medium on CPU naive:  0.3554835319519043
-Medium on CPU tuned:  0.012917041778564453
-Medium on GPU JIT  :  0.0027153491973876953
+Medium on CPU naive    :  0.3700222969055176
+Medium on CPU tuned    :  0.012504339218139648
+Medium on GPU expl JIT :  0.0026030540466308594
+Medium on GPU impl JIT :  0.0030972957611083984
+Medium on GPU JIT+numpy:  0.0169675350189209
 Large matrix shape:  (25145, 25145)
-Large on CPU naive:  3.1566247940063477
-Large on CPU tuned:  0.08973264694213867
-Large on GPU JIT  :  0.007985830307006836
+Large on CPU naive    :  3.2510576248168945
+Large on CPU tuned    :  0.09879922866821289
+Large on GPU expl JIT :  0.009454965591430664
+Large on GPU impl JIT :  0.0073010921478271484
+Large on GPU JIT+numpy:  0.05150198936462402
