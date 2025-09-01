@@ -28,6 +28,8 @@ Exercises
 A numpy array can be converted to a cupy array,
 and then you operate on it as before.
 
+Let's start with a simple, memory-bound problem.
+
 Look inside
 center_matrix_naive.py
 
@@ -40,6 +42,8 @@ taskset -c 24-47,120-143 python center_matrix_naive.py
 ------------------------------------
 A numpy array can be converted to a cupy array,
 and then used with either library.
+
+Here we pick a compute-heavy library.
 
 Look inside
 lingalg_qr.py
@@ -94,6 +98,8 @@ and then try to execute it with
 export ROCR_VISIBLE_DEVICES=1
 # shared memory is disabled by default, must set the two env variables
 CUPY_ENABLE_UMP=1 HSA_XNACK=1 taskset -c 24-47,120-143 python center_matrix_naive_apu.py
+
+Compare the benchmark results with those in (1).
 
 As further exercise, try to modify the other python files along the same lines, too.
 

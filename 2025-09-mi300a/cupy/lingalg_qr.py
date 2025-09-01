@@ -16,6 +16,7 @@ cmat_med = cupy.asarray(mat_med)
 
 # initialize the GPU compute, to make benchmarking results fair
 n = cupy.linalg.qr(cmat_small)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 
 print("Small matrix shape: ", mat_small.shape)
 
@@ -26,11 +27,13 @@ print("Small on CPU: ", t2-t1)
 
 t1 = time.time()
 n = cupy.linalg.qr(cmat_small)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 t2 = time.time()
 print("Small on GPU: ", t2-t1)
 
 t1 = time.time()
 n = numpy.linalg.qr(cmat_small)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 t2 = time.time()
 print("Small on GPU using numpy: ", t2-t1)
 
@@ -51,11 +54,13 @@ print("Medium on CPU: ", t2-t1)
 
 t1 = time.time()
 n = cupy.linalg.qr(cmat_med)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 t2 = time.time()
 print("Medium on GPU: ", t2-t1)
 
 t1 = time.time()
 n = numpy.linalg.qr(cmat_med)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 t2 = time.time()
 print("Medium on GPU using numpy: ", t2-t1)
 
@@ -63,16 +68,18 @@ print("Large matrix shape: ", mat.shape)
 
 t1 = time.time()
 n = numpy.linalg.qr(cmat)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 t2 = time.time()
 print("Large on GPU using numpy: ", t2-t1)
 
 t1 = time.time()
 n = cupy.linalg.qr(cmat)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 t2 = time.time()
 print("Large on GPU: ", t2-t1)
 
 # we expect this to tak a long time
-print("About to compute Large on CPU")
+print("About to compute Large on CPU (expected to last minutes)")
 t1 = time.time()
 n = numpy.linalg.qr(mat)
 t2 = time.time()

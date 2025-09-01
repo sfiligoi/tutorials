@@ -56,6 +56,7 @@ cmat_med = cupy.asarray(mat_med)
 
 # initialize the GPU compute, to make benchmarking results fair
 r2 = center_distance_matrix(cupy.asarray(mat[:100,:100].copy()).copy())
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 
 t1 = time.time()
 r1 = center_distance_matrix(mat_small)
@@ -64,6 +65,7 @@ print("Small on CPU: ", t2-t1)
 
 t1 = time.time()
 r2 = center_distance_matrix(cmat_small)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 t2 = time.time()
 print("Small on GPU: ", t2-t1)
 
@@ -77,6 +79,7 @@ print("Medium on CPU: ", t2-t1)
 
 t1 = time.time()
 r2 = center_distance_matrix(cmat_med)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 t2 = time.time()
 print("Medium on GPU: ", t2-t1)
 
@@ -89,6 +92,7 @@ print("Large on CPU: ", t2-t1)
 
 t1 = time.time()
 r2 = center_distance_matrix(cmat)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 t2 = time.time()
 print("Large on GPU: ", t2-t1)
 
@@ -100,6 +104,7 @@ print("Large on CPU: ", t2-t1)
 
 t1 = time.time()
 r1 = center_distance_matrix(cmat)
+cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
 t2 = time.time()
 print("Large on GPU: ", t2-t1)
 

@@ -1,15 +1,15 @@
-(cupy-tutorial) x8000c2s5b1n0 > taskset -c 24-47,120-143 python lingalg_qr.py
+(cupy-tutorial) x8000c0s0b0n0 > taskset -c 24-47,120-143 python lingalg_qr.py
 Small matrix shape:  (2794, 2794)
-Small on CPU:  0.7161779403686523
-Small on GPU:  0.12570571899414062
-Small on GPU using numpy:  0.13358259201049805
+Small on CPU:  0.8885369300842285
+Small on GPU:  0.13500595092773438
+Small on GPU using numpy:  0.15451908111572266
 [INFO] Cannot pass numpy array to cupy
 Medium matrix shape:  (8382, 8382)
-Medium on CPU:  7.139935731887817
-Medium on GPU:  0.5356099605560303
-Medium on GPU using numpy:  0.545781135559082
+Medium on CPU:  7.414109706878662
+Medium on GPU:  0.5628149509429932
+Medium on GPU using numpy:  0.5765693187713623
 Large matrix shape:  (25145, 25145)
-Large on GPU using numpy:  6.233250141143799
-Large on GPU:  5.588013410568237
-About to compute Large on CPU
-Large on CPU:  108.4948582649231
+Large on GPU using numpy:  6.302797555923462
+Large on GPU:  5.64296293258667
+About to compute Large on CPU (expected to last minutes)
+Large on CPU:  107.44027900695801

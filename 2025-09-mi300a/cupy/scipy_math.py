@@ -47,11 +47,13 @@ for i in range(2):
     n1 = cupyx.scipy.special.cotdg(cmat3_small).max()
     if abs(n1-n1c) > 0.1:
        printf("[ERROR] Precision test failed") 
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t2 = time.time()
     print("Small base on GPU   : ", t2-t1)
     n2 = cupyx.scipy.special.entr(cupyx.scipy.special.cotdg(cmat1_small*pi).flatten()).max()
     if abs(n2-n2c) > 0.1:
        printf("[ERROR] Precision test failed") 
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t3 = time.time()
     print("Small compose on GPU: ", t3-t2)
 
@@ -59,11 +61,13 @@ for i in range(2):
     n1 = scipy.special.cotdg(cmat4_small).max()
     if abs(n1-n1c) > 0.1:
        printf("[ERROR] Precision test failed") 
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t2 = time.time()
     print("Small base on GPU using scipy   : ", t2-t1)
     n2 = scipy.special.entr(scipy.special.cotdg(cmat2_small*pi).flatten()).max()
     if abs(n2-n2c) > 0.1:
        printf("[ERROR] Precision test failed") 
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t3 = time.time()
     print("Small compose on GPU using scipy: ", t3-t2)
 
@@ -89,6 +93,7 @@ for i in range(2):
     n2 = cupyx.scipy.special.entr(cupyx.scipy.special.cotdg(cmat1_med*pi).flatten()).max()
     if abs(n2-n2c) > 0.1:
        printf("[ERROR] Precision test failed") 
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t2 = time.time()
     print("Medium compose on GPU: ", t2-t1)
 
@@ -96,6 +101,7 @@ for i in range(2):
     n2 = scipy.special.entr(scipy.special.cotdg(cmat2_med*pi).flatten()).max()
     if abs(n2-n2c) > 0.1:
        printf("[ERROR] Precision test failed") 
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t2 = time.time()
     print("Medium compose on GPU using scipy: ", t2-t1)
 
@@ -116,11 +122,13 @@ for i in range(2):
     n1 = cupyx.scipy.special.cotdg(cmat3).max()
     if abs(n1-n1c) > 0.1:
        printf("[ERROR] Precision test failed") 
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t2 = time.time()
     print("Large base on GPU   : ", t2-t1)
     n2 = cupyx.scipy.special.entr(cupyx.scipy.special.cotdg(cmat1*pi).flatten()).max()
     if abs(n2-n2c) > 0.1:
        printf("[ERROR] Precision test failed") 
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t3 = time.time()
     print("Large compose on GPU: ", t3-t2)
 
@@ -128,11 +136,14 @@ for i in range(2):
     n1 = scipy.special.cotdg(cmat4).max()
     if abs(n1-n1c) > 0.1:
        printf("[ERROR] Precision test failed") 
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t2 = time.time()
     print("Large base on GPU using scipy   : ", t2-t1)
     n2 = scipy.special.entr(scipy.special.cotdg(cmat2*pi).flatten()).max()
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     if abs(n2-n2c) > 0.1:
        printf("[ERROR] Precision test failed") 
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t3 = time.time()
     print("Large compose on GPU using scipy: ", t3-t2)
 

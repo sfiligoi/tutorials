@@ -1,12 +1,12 @@
-(cupy-tutorial) x8000c2s5b1n0 > CUPY_ENABLE_UMP=1 HSA_XNACK=1 taskset -c 24-47,120-143 python center_matrix_naive_apu.py
-Small on CPU:  0.04435563087463379
-Small on GPU:  0.001192331314086914
+(cupy-tutorial) x8000c0s0b0n0 > CUPY_ENABLE_UMP=1 HSA_XNACK=1 taskset -c 24-47,120-143 python center_matrix_naive_apu.py
+Small on CPU:  0.04180502891540527
+Small on GPU:  0.05005168914794922
 Medium matrix shape:  (8382, 8382)
-Medium on CPU:  0.3452439308166504
-Medium on GPU:  0.0008525848388671875
+Medium on CPU:  0.3583049774169922
+Medium on GPU:  0.5895626544952393
 Large matrix shape:  (25145, 25145)
-Large on CPU:  2.9265589714050293
-Large on GPU:  2.1867270469665527
+Large on CPU:  3.139238119125366
+Large on GPU:  5.823537826538086
 ... Retrying
-Large on CPU:  2.600065231323242
-Large on GPU:  0.007103681564331055
+Large on CPU:  2.990196466445923
+Large on GPU:  0.9934370517730713

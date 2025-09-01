@@ -39,6 +39,7 @@ for i in range(2):
     # spearman is slow, so only test with small matrix
     cmat1 = rebin(cmat1_large, (1564,1564))
     cmat2 = rebin(cmat2_large, (1564,1564))
+    cupy.cuda.Device(0).synchronize() # cuPy is async... wait for actual compute
     t2 = time.time()
     print("Prepare on GPU : ", t2-t1)
     # spearmanr is not cupy aware, so we need to explicitly convert
