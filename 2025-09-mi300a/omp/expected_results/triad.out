@@ -1,0 +1,39 @@
+x8000c2s5b0n0 > taskset -c 24-47,120-143 ./triad_cpu
+--- Try 1, els: 2000000000
+[fp32] took 0.118 s
+[fp32] took 0.118 s
+[fp32] took 0.118 s
+[fp32] took 0.118 s
+[fp64] took 0.234 s
+[fp64] took 0.234 s
+[fp64] took 0.234 s
+[fp64] took 0.234 s
+--- Try 2, els: 2000000000
+[fp32] took 0.117 s
+[fp32] took 0.117 s
+[fp32] took 0.117 s
+[fp32] took 0.117 s
+[fp64] took 0.234 s
+[fp64] took 0.234 s
+[fp64] took 0.234 s
+[fp64] took 0.234 s
+
+x8000c2s5b0n0 > HSA_XNACK=1 taskset -c 24-47,120-143 ./triad_gpu
+--- Try 1, els: 2000000000
+[fp32] took 0.012 s
+[fp32] took 0.011 s
+[fp32] took 0.011 s
+[fp32] took 0.011 s
+[fp64] took 0.017 s
+[fp64] took 0.017 s
+[fp64] took 0.017 s
+[fp64] took 0.017 s
+--- Try 2, els: 2000000000
+[fp32] took 0.012 s
+[fp32] took 0.011 s
+[fp32] took 0.011 s
+[fp32] took 0.011 s
+[fp64] took 0.017 s
+[fp64] took 0.016 s
+[fp64] took 0.017 s
+[fp64] took 0.017 s
