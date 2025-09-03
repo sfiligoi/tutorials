@@ -51,3 +51,24 @@ export ROCR_VISIBLE_DEVICES=1
 # Must explicity enable HSA_XNACK to get APU semantics
 HSA_XNACK=1 taskset -c 24-47,120-143 ./triad_gpu
 
+3) Different optimization options
+---------------------------------
+Memory-heavy algorithms benefit most from
+avoiding intermediate temporary buffers.
+
+But there may be further savings to be had if using the caches,
+although that may come at a vectorization cost.
+Given the architectural differences between CPU and GPU compute,
+a different optimization may be best in the two cases.
+
+Look inside
+center_matrix_omp.cpp
+
+and then try to build and execute it with
+make center_matrix
+# Force the use of the 2nd APU on the node
+taskset -c 24-47,120-143 ./center_matrix_cpu
+export ROCR_VISIBLE_DEVICES=1
+# Must explicity enable HSA_XNACK to get APU semantics
+HSA_XNACK=1 taskset -c 24-47,120-143 ./center_matrix_gpu
+

@@ -17,5 +17,14 @@ triad_cpu: triad.cpp
 triad_gpu: triad.cpp
 	$(CXX) $(GPUFLAGS) -DOMPGPU -o triad_gpu triad.cpp
 
+center_matrix: center_matrix_cpu center_matrix_gpu
+	# built center_matrix_cpu center_matrix_gpu
+
+center_matrix_cpu: center_matrix_omp.cpp
+	$(CXX) -o center_matrix_cpu center_matrix_omp.cpp
+
+center_matrix_gpu: center_matrix_omp.cpp
+	$(CXX) $(GPUFLAGS) -DOMPGPU -o center_matrix_gpu center_matrix_omp.cpp
+
 clean:
-	rm -f dynamic_memory triad_cpu triad_gpu
+	rm -f dynamic_memory triad_cpu triad_gpu center_matrix_cpu center_matrix_gpu
