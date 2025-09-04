@@ -1,0 +1,15 @@
+x8000c2s5b0n0 > taskset -c 24-47,120-143 ./partial_parallel_cpu
+[      1000 try 1] C0 = 487.996857 (took 0.056 s init 0.000 s)
+[      1000 try 2] C0 = 489.574249 (took 0.031 s init 0.000 s)
+[   1000000 try 1] C0 = 484.470093 (took 0.091 s init 0.013 s)
+[   1000000 try 2] C0 = 496.066559 (took 0.104 s init 0.020 s)
+[ 100000000 try 1] C0 = 502.417175 (took 5.076 s init 0.918 s)
+[ 100000000 try 2] C0 = 496.322266 (took 5.105 s init 0.723 s)
+
+x8000c2s5b0n0 > HSA_XNACK=1 taskset -c 24-47,120-143 ./partial_parallel_gpu
+[      1000 try 1] C0 = 487.996887 (took 0.104 s init 0.000 s)
+[      1000 try 2] C0 = 489.574249 (took 0.017 s init 0.000 s)
+[   1000000 try 1] C0 = 484.470093 (took 0.044 s init 0.010 s)
+[   1000000 try 2] C0 = 496.066528 (took 0.042 s init 0.007 s)
+[ 100000000 try 1] C0 = 502.417206 (took 0.736 s init 0.863 s)
+[ 100000000 try 2] C0 = 496.322266 (took 0.517 s init 0.659 s)
