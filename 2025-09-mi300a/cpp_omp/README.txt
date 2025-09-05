@@ -150,3 +150,25 @@ export ROCR_VISIBLE_DEVICES=1
 # Must explicity enable HSA_XNACK to get APU semantics
 HSA_XNACK=1 taskset -c 24-47,120-143 ./omp_ext_gpu
 
+7) Using external functions - offload hidden
+--------------------------------------------
+Not all code is typically in a single source file.
+Keeping functions in separate files and compiling them 
+independently is standard practive in non-trivial applications.
+
+Here we show an example where all the GPU acceleration is hidden from the caller.
+
+Look inside the following files:
+Main:
+  full_ext.cpp
+External functions, mimicking a library:
+  full_ext_func.cpp
+
+and then try to build and execute the compiled apps with
+make full_ext
+# Force the use of the 2nd APU on the node
+taskset -c 24-47,120-143 ./full_ext_cpu
+export ROCR_VISIBLE_DEVICES=1
+# Must explicity enable HSA_XNACK to get APU semantics
+HSA_XNACK=1 taskset -c 24-47,120-143 ./full_ext_gpu
+

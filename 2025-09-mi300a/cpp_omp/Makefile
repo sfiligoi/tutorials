@@ -61,7 +61,20 @@ omp_ext_gpu: omp_ext.cpp omp_ext_inlines.hpp omp_ext_func.cpp
 	$(CXX) $(GPUFLAGS) -DOMPGPU -o omp_ext_gpu omp_ext.cpp omp_ext_func_gpu.o
 	rm -f omp_ext_func_gpu.o
 
+full_ext: full_ext_cpu full_ext_gpu
+	# built full_ext_cpu full_ext_gpu
+
+full_ext_cpu: full_ext.cpp full_ext_func.cpp
+	$(CXX) -o full_ext_func_cpu.o -c full_ext_func.cpp
+	$(CXX) -o full_ext_cpu full_ext.cpp full_ext_func_cpu.o
+	rm -f full_ext_func_cpu.o
+
+full_ext_gpu: full_ext.cpp full_ext_func.cpp
+	$(CXX) $(GPUFLAGS) -DOMPGPU -o full_ext_func_gpu.o -c full_ext_func.cpp
+	$(CXX) $(GPUFLAGS) -DOMPGPU -o full_ext_gpu full_ext.cpp full_ext_func_gpu.o
+	rm -f full_ext_func_gpu.o
+
 clean:
 	rm -f dynamic_memory triad_cpu triad_gpu center_matrix_cpu center_matrix_gpu partial_parallel_cpu partial_parallel_gpu
-	rm -f cpp_ext_cpu cpp_ext_gpu omp_ext_cpu omp_ext_gpu
+	rm -f cpp_ext_cpu cpp_ext_gpu omp_ext_cpu omp_ext_gpu full_ext_cpu full_ext_gpu
 

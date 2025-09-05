@@ -1,0 +1,11 @@
+x8000c2s5b0n0 > taskset -c 24-47,120-143 ./full_ext_cpu
+[   1000000 try 1] full ext C0 =  103.786 (took 0.025 s)
+[   1000000 try 2] full ext C0 =  103.786 (took 0.029 s)
+[ 100000000 try 1] full ext C0 =   94.972 (took 0.921 s)
+[ 100000000 try 2] full ext C0 =   94.972 (took 0.884 s)
+
+x8000c2s5b0n0 > HSA_XNACK=1 taskset -c 24-47,120-143 ./full_ext_gpu
+[   1000000 try 1] full ext C0 =  103.786 (took 0.005 s)
+[   1000000 try 2] full ext C0 =  103.786 (took 0.005 s)
+[ 100000000 try 1] full ext C0 =   94.972 (took 0.102 s)
+[ 100000000 try 2] full ext C0 =   94.972 (took 0.107 s)
