@@ -97,3 +97,32 @@ export ROCR_VISIBLE_DEVICES=1
 # Must explicity enable HSA_XNACK to get APU semantics
 HSA_XNACK=1 taskset -c 24-47,120-143 ./partial_parallel_gpu
 
+5) Using external functions - Naive
+-----------------------------------
+Not all code is typically in a single source file.
+Keeping functions in separate files and compiling them 
+independently is standard practive in non-trivial applications.
+
+Here we simulate a 2-file setup,
+and use a trival (and naive) wrapper to enable GPU code generation
+that can be used from inside a GPU loop.
+
+An inline equivalent is provided to show the performance difference.
+Note that both a trivial and a more involved external function are present.
+
+Look inside the following files:
+Main:
+  omp_ext.cpp
+External functions (not GPU aware):
+  omp_ext_func.cpp
+Wrapper to add GPU compilation:
+  omp_ext_func_gpu_wrap.cpp
+
+and then try to build and execute the compiled apps with
+make omp_ext
+# Force the use of the 2nd APU on the node
+taskset -c 24-47,120-143 ./omp_ext_cpu
+export ROCR_VISIBLE_DEVICES=1
+# Must explicity enable HSA_XNACK to get APU semantics
+HSA_XNACK=1 taskset -c 24-47,120-143 ./omp_ext_gpu
+
