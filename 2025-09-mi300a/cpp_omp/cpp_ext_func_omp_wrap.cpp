@@ -1,10 +1,10 @@
 /*  Helper file, do not use directly
  *  Adds the GPU-specific pieces to make
- *  omp_ext_func.cpp
+ *  cpp_ext_func.cpp
  *  usable from GPU loops.
  */
 
-#include "omp_ext_func.cpp"
+#include "cpp_ext_func.cpp"
 
 // the following will force the creation of a GPU variant
 #pragma omp declare target to(oneE)

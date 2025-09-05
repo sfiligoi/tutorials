@@ -7,13 +7,14 @@
 
 // Header-only external functions and be complex
 // but they can still all be inlined by the compiler
-#include "omp_ext_inlines.hpp"
+#include "cpp_ext_inlines.hpp"
 
 // Just declare here to avoid using a header file
-// implementation in omp_ext_func.cpp
+// implementation in cpp_ext_func.cpp
 // In real libraries there would have been a header file for these
 void oneE(float& c, float& a, float& b);
 void hundredE(float* C, float* A, float* B, int N);
+
 
 void compute(const int N) {
    float* oA = new float[N];
@@ -124,7 +125,7 @@ void compute(const int N) {
 	for (int j=0; j<100; j++) {
 		// this loop will run in parallel
 #ifdef OMPGPU
-#pragma omp target teams distribute
+#pragma omp target teams distribute parallel for
 #else
 #pragma omp parallel for
 #endif
@@ -150,7 +151,7 @@ void compute(const int N) {
 	for (int j=0; j<100; j++) {
 		// this loop will run in parallel
 #ifdef OMPGPU
-#pragma omp target teams distribute
+#pragma omp target teams distribute parallel for
 #else
 #pragma omp parallel for
 #endif

@@ -1,21 +1,14 @@
 /*  Helper file, do not use directly
  *  Mimick a library maintained by others
- *  that has been made GPU-aware
  *
- *  Used by omp_ext.cpp
+ *  Used by cpp_ext.cpp
  */
 
-#ifdef OMPGPU
-#pragma omp declare target
-#endif
 void oneE(float& c, float& a, float& b) {
 	c += a*b;
 	a += 1.e-9*c;
 	b -= 1.e-10*c;
 }
-#ifdef OMPGPU
-#pragma omp end declare target
-#endif
 
 /*
  * We use a simple block loop as an example of a not-trivial logic
@@ -23,16 +16,7 @@ void oneE(float& c, float& a, float& b) {
  * Real-life code would likely be significantly more complex.
  *
  */
-#ifdef OMPGPU
-#pragma omp declare target
-#endif
 void hundredE(float* C, float* A, float* B, int N) {
-#ifdef OMPGPU
-#pragma omp parallel for 
-#endif
 	for (int i=0; i<N; i++) oneE(C[i],A[i],B[i]);
 }
-#ifdef OMPGPU
-#pragma omp end declare target
-#endif
 
