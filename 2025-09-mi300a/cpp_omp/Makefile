@@ -1,6 +1,6 @@
 CXX = amdclang++ --std=c++17 -O3 -fopenmp
 GPUFLAGS = --offload-arch=gfx942:xnack+
-
+HIPLIBFLAGS =  -D__HIP_PLATFORM_AMD__ -I /opt/rocm-6.3.0/include -L /opt/rocm-6.3.0/lib
 
 all:
 	# Must explicitly select one binary
@@ -74,7 +74,10 @@ full_ext_gpu: full_ext.cpp full_ext_func.cpp
 	$(CXX) $(GPUFLAGS) -DOMPGPU -o full_ext_gpu full_ext.cpp full_ext_func_gpu.o
 	rm -f full_ext_func_gpu.o
 
+fft_batch_gpu: fft_batch.cpp
+	$(CXX) $(GPUFLAGS) $(HIPLIBFLAGS) -DOMPGPU -o fft_batch_gpu fft_batch.cpp -lhipfft -lamdhip64
+
 clean:
 	rm -f dynamic_memory triad_cpu triad_gpu center_matrix_cpu center_matrix_gpu partial_parallel_cpu partial_parallel_gpu
-	rm -f cpp_ext_cpu cpp_ext_gpu omp_ext_cpu omp_ext_gpu full_ext_cpu full_ext_gpu
+	rm -f cpp_ext_cpu cpp_ext_gpu omp_ext_cpu omp_ext_gpu full_ext_cpu full_ext_gpu fft_batch_gpu
 

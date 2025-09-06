@@ -172,3 +172,25 @@ export ROCR_VISIBLE_DEVICES=1
 # Must explicity enable HSA_XNACK to get APU semantics
 HSA_XNACK=1 taskset -c 24-47,120-143 ./full_ext_gpu
 
+
+7) Using external functions - batching
+--------------------------------------
+When using external functions that internally
+execute GPU code, the invocation overhead may be high.
+When many small problems can be processed in parallel, 
+using a batched approach can be a significant performance boost.
+
+Here we show an example using the HIP 2D FFT library.
+
+Look inside
+fft_batch.cpp
+
+and then try to build and execute the compiled apps with
+make fft_batch_gpu
+# Force the use of the 2nd APU on the node
+export ROCR_VISIBLE_DEVICES=1
+# Must explicity enable HSA_XNACK to get APU semantics
+HSA_XNACK=1 taskset -c 24-47,120-143 ./fft_batch_gpu
+
+Note: No CPU equivalent provided.
+      Creating an equivalent using FFTW on CPU is left to the user.

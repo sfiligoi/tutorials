@@ -1,0 +1,22 @@
+x8000c2s5b1n0 > HSA_XNACK=1 taskset -c 24-47,120-143 ./fft_batch_gpu
+--- Single FFT
+[   504x   504x 1 try 1] took 0.00146 s [Val: -8656.95]
+[   504x   504x 1 try 2] took 0.00009 s [Val: -8656.95]
+[  4032x  4032x 1 try 1] took 0.01507 s [Val: -554044.38]
+[  4032x  4032x 1 try 2] took 0.00119 s [Val: -554044.38]
+[ 36288x 36288x 1 try 1] took 1.69761 s [Val: 0.00]
+[ 36288x 36288x 1 try 2] took 0.02821 s [Val: 0.00]
+--- Multiple FFTs in sequence
+[   504x   504x1000 try 1] took 0.087 s [Val: -8656.95]
+[   504x   504x1000 try 2] took 0.087 s [Val: -8656.95]
+[  4032x  4032x 100 try 1] took 0.124 s [Val: -554044.38]
+[  4032x  4032x 100 try 2] took 0.107 s [Val: -554044.38]
+[ 36288x 36288x  10 try 1] took 1.970 s [Val: 0.00]
+[ 36288x 36288x  10 try 2] took 0.283 s [Val: 0.00]
+--- Multiple FFTs in batch mode
+[   504x   504x1000 try 1] took 0.339 s [Val: -8656.95]
+[   504x   504x1000 try 2] took 0.008 s [Val: -8656.95]
+[  4032x  4032x 100 try 1] took 1.453 s [Val: -554044.38]
+[  4032x  4032x 100 try 2] took 0.094 s [Val: -554044.38]
+[ 36288x 36288x  10 try 1] took 20.986 s [Val: 0.00]
+[ 36288x 36288x  10 try 2] took 3.887 s [Val: 0.00]
