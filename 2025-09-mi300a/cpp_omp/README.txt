@@ -173,7 +173,7 @@ export ROCR_VISIBLE_DEVICES=1
 HSA_XNACK=1 taskset -c 24-47,120-143 ./full_ext_gpu
 
 
-7) Using external functions - batching
+8) Using external functions - batching
 --------------------------------------
 When using external functions that internally
 execute GPU code, the invocation overhead may be high.
