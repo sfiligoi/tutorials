@@ -16,5 +16,6 @@ cupy  - Using cuPy to speed up compute on AMD MI300A
 jax   - Using JAX to speed up compute on AMD MI300A
 skbio - First 2 esercises, Using backend GPU detection in skbio
 
-2) TBD
-------
+2) C++ based exercises
+----------------------
+cpp_omp - Using OpenMP based parallelism
