@@ -1,0 +1,17 @@
+x8000c2s5b0n0 > taskset -c 24-47,120-143 ./permanova
+[OpenMP try 2] Small  ( 2794x 2794x  1000): took 0.009 s
+[HIP    try 2] Small  ( 2794x 2794x  1000): took 0.007 s
+[OpenMP try 2] Small  ( 2794x 2794x 10000): took 0.088 s
+[HIP    try 2] Small  ( 2794x 2794x 10000): took 0.035 s
+[OpenMP try 2] Small  ( 2794x 2794x100000): took 0.805 s
+[HIP    try 2] Small  ( 2794x 2794x100000): took 0.346 s
+[OpenMP try 2] Medium ( 8382x 8382x  1000): took 0.077 s
+[HIP    try 2] Medium ( 8382x 8382x  1000): took 0.080 s
+[OpenMP try 2] Medium ( 8382x 8382x 10000): took 0.631 s
+[HIP    try 2] Medium ( 8382x 8382x 10000): took 0.330 s
+[OpenMP try 2] Medium ( 8382x 8382x100000): took 6.106 s
+[HIP    try 2] Medium ( 8382x 8382x100000): took 3.372 s
+[OpenMP try 2] Large  (25145x25145x  1000): took 0.603 s
+[HIP    try 2] Large  (25145x25145x  1000): took 1.045 s
+[OpenMP try 2] Large  (25145x25145x 10000): took 5.842 s
+[HIP    try 2] Large  (25145x25145x 10000): took 3.849 s

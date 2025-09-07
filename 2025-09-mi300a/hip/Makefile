@@ -30,7 +30,16 @@ triad_hip_opt: triad_func.hip triad_main.o
 	$(CXX) $(GPUFLAGS) $(HIPLIBFLAGS) -o triad_hip_opt triad_main.o triad_func_hip_opt.o -lamdhip64
 	rm -f triad_func_hip_opt.o
 
+permanova_func_omp.o: permanova_func_omp.cpp
+	$(CXX) $(GPUFLAGS) -DOMPGPU -o permanova_func_omp.o -c permanova_func_omp.cpp
+
+permanova_func_hip.o: permanova_func_hip.hip
+	$(HIPCXX) $(GPUFLAGS) -o permanova_func_hip.o -c permanova_func_hip.hip
+
+permanova: permanova_func_omp.o permanova_func_hip.o permanova.cpp
+	$(CXX) $(GPUFLAGS) $(HIPLIBFLAGS) -o permanova permanova.cpp permanova_func_omp.o permanova_func_hip.o -lamdhip64
+
 clean:
 	rm -f *.o
-	rm -f triad_omp triad_hip triad_hip_opt
+	rm -f triad_omp triad_hip triad_hip_opt permanova
 
