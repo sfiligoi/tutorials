@@ -76,3 +76,39 @@ export HSA_XNACK=1
 export ROCR_VISIBLE_DEVICES=1
 taskset -c 24-47,120-143 ./permanova
 
+3) Tensor compute with HIP and ROCM
+-----------------------------------
+Modern GPUs are optimized for tensor compute,
+where they will deliver order of magnitude more performance 
+than regular, vector compute.
+Especially when using lower-precision math.
+
+Apart from using libraries on large buffers,
+a programmer can also make direct use of them
+using a mix of HIP and ROCM.
+
+Here we look at GEMM examples developped by AMD.
+
+The clean implementation, which ends up beaing memory-bound is:
+wmma_simple_sgemm.cpp
+wmma_simple_hgemm.cpp
+
+To fully utilize the compute performance of tensor cores
+(without being throttled by memory access)
+requires significantly more code, see:
+wmma_perf_sgemm.cpp
+wmma_perf_hgemm.cpp
+
+Note that there is no CPU version being benchmarked..
+
+Try to build and execute it with
+make wmma
+# Must explicity enable HSA_XNACK to get APU semantics
+export HSA_XNACK=1
+# Force the use of the 2nd APU on the node
+export ROCR_VISIBLE_DEVICES=1
+taskset -c 24-47,120-143 ./wmma_simple_sgemm
+taskset -c 24-47,120-143 ./wmma_simple_hgemm
+taskset -c 24-47,120-143 ./wmma_perf_sgemm
+taskset -c 24-47,120-143 ./wmma_perf_hgemm
+

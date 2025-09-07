@@ -39,7 +39,14 @@ permanova_func_hip.o: permanova_func_hip.hip
 permanova: permanova_func_omp.o permanova_func_hip.o permanova.cpp
 	$(CXX) $(GPUFLAGS) $(HIPLIBFLAGS) -o permanova permanova.cpp permanova_func_omp.o permanova_func_hip.o -lamdhip64
 
+wmma:
+	$(CXX) $(GPUFLAGS) $(HIPLIBFLAGS) -DNDEBUG -o wmma_simple_hgemm -x hip wmma_simple_hgemm.cpp 
+	$(CXX) $(GPUFLAGS) $(HIPLIBFLAGS) -DNDEBUG -o wmma_simple_sgemm -x hip wmma_simple_sgemm.cpp 
+	$(CXX) $(GPUFLAGS) $(HIPLIBFLAGS) -DNDEBUG -o wmma_perf_hgemm -x hip wmma_perf_hgemm.cpp 
+	$(CXX) $(GPUFLAGS) $(HIPLIBFLAGS) -DNDEBUG -o wmma_perf_sgemm -x hip wmma_perf_sgemm.cpp 
+
 clean:
 	rm -f *.o
 	rm -f triad_omp triad_hip triad_hip_opt permanova
+	rm -f simple_hgemm simple_sgemm perf_hgemm perf_sgemm
 
