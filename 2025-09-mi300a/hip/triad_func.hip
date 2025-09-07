@@ -59,8 +59,8 @@ void triad(uint64_t STREAM_ARRAY_SIZE, TReal scalar, TReal * __restrict__ a, TRe
 
 // Do more work in each HIP function
 template<typename TReal>
-__global__ void triad_one(uint64_t STREAM_ARRAY_SIZE, uint32_t n_iters, uint32_t vector_size,
-                          TReal scalar, TReal * __restrict__ a, TReal * __restrict__ b,TReal * __restrict__ c) {
+__global__ void triad_many(uint64_t STREAM_ARRAY_SIZE, uint32_t n_iters, uint32_t vector_size,
+                           TReal scalar, TReal * __restrict__ a, TReal * __restrict__ b,TReal * __restrict__ c) {
   const uint64_t itr_vect_size = uint64_t(vector_size)*n_iters; // number of element processed by this vector compute
   uint64_t j = blockIdx.x*itr_vect_size+threadIdx.x;
   // This is one thread in a warp (aka wavefront)
@@ -80,7 +80,7 @@ void triad(uint64_t STREAM_ARRAY_SIZE, TReal scalar, TReal * __restrict__ a, TRe
   const uint32_t div = n_blocks*vector_size;
   const uint32_t n_iters = (STREAM_ARRAY_SIZE + (div-1)) / div; // round up
   //printf("[INFO] Grid: %u x %u, div: %u iter: %u\n", n_blocks, vector_size, div, n_iters);
-  triad_one<TReal><<<n_blocks, vector_size>>>(STREAM_ARRAY_SIZE,n_iters,vector_size,scalar,a,b,c);
+  triad_many<TReal><<<n_blocks, vector_size>>>(STREAM_ARRAY_SIZE,n_iters,vector_size,scalar,a,b,c);
   if (hipDeviceSynchronize()!=hipSuccess) {printf("[ERROR] hipDeviceSynchronize failed!\n");}
 }
 #endif
