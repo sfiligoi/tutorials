@@ -19,3 +19,4 @@ skbio - First 2 esercises, Using backend GPU detection in skbio
 2) C++ based exercises
 ----------------------
 cpp_omp - Using OpenMP based parallelism
+hip     - Using HIP based GPU offloading

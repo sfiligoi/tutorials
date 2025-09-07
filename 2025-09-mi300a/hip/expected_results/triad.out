@@ -1,0 +1,59 @@
+x8000c2s5b0n0 > taskset -c 24-47,120-143 ./triad_omp
+--- Try 1, els: 2000000000
+[fp32] took 0.0126 s
+[fp32] took 0.0117 s
+[fp32] took 0.0112 s
+[fp32] took 0.0112 s
+[fp64] took 0.0165 s
+[fp64] took 0.0166 s
+[fp64] took 0.0165 s
+[fp64] took 0.0165 s
+--- Try 2, els: 2000000000
+[fp32] took 0.0130 s
+[fp32] took 0.0122 s
+[fp32] took 0.0121 s
+[fp32] took 0.0111 s
+[fp64] took 0.0167 s
+[fp64] took 0.0164 s
+[fp64] took 0.0165 s
+[fp64] took 0.0165 s
+
+x8000c2s5b0n0 > taskset -c 24-47,120-143 ./triad_hip
+--- Try 1, els: 2000000000
+[fp32] took 0.9623 s
+[fp32] took 0.0094 s
+[fp32] took 0.0092 s
+[fp32] took 0.0093 s
+[fp64] took 0.0161 s
+[fp64] took 0.0155 s
+[fp64] took 0.0158 s
+[fp64] took 0.0157 s
+--- Try 2, els: 2000000000
+[fp32] took 0.0093 s
+[fp32] took 0.0093 s
+[fp32] took 0.0100 s
+[fp32] took 0.0094 s
+[fp64] took 0.0161 s
+[fp64] took 0.0154 s
+[fp64] took 0.0154 s
+[fp64] took 0.0155 s
+
+x8000c2s5b0n0 > taskset -c 24-47,120-143 ./triad_hip_opt
+--- Try 1, els: 2000000000
+[fp32] took 0.2413 s
+[fp32] took 0.0081 s
+[fp32] took 0.0081 s
+[fp32] took 0.0081 s
+[fp64] took 0.0155 s
+[fp64] took 0.0153 s
+[fp64] took 0.0152 s
+[fp64] took 0.0153 s
+--- Try 2, els: 2000000000
+[fp32] took 0.0080 s
+[fp32] took 0.0076 s
+[fp32] took 0.0079 s
+[fp32] took 0.0078 s
+[fp64] took 0.0158 s
+[fp64] took 0.0150 s
+[fp64] took 0.0154 s
+[fp64] took 0.0153 s
